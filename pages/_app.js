@@ -1,10 +1,13 @@
 import { ThemeProvider } from "next-themes";
 import "../styles/globals.scss";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   );
 }
