@@ -16,18 +16,20 @@ const Theme = () => {
   };
 
   return (
-    <div className={styles["toggle-icon-container"]}>
-      {theme === "light" ? (
-        <BsFillMoonFill
-          className={styles["toggle-icon"]}
-          onClick={toggleTheme}
-        />
-      ) : (
-        <BsFillSunFill
-          className={styles["toggle-icon"]}
-          onClick={toggleTheme}
-        />
-      )}
+    <div className="container">
+      <div className={styles["toggle-icon-container"]}>
+        {theme === "light" ? (
+          <BsFillMoonFill
+            className={styles["toggle-icon"]}
+            onClick={toggleTheme}
+          />
+        ) : (
+          <BsFillSunFill
+            className={styles["toggle-icon"]}
+            onClick={toggleTheme}
+          />
+        )}
+      </div>
     </div>
   );
 };
