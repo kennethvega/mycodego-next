@@ -1,0 +1,13 @@
+.toggle-icon-container {
+  padding: 1rem;
+  // width: 5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.toggle-icon {
+  cursor: pointer;
+  font-size: 3rem;
+  color: var(--text);
+}
