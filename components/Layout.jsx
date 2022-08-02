@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Theme from "./Theme";
 
 const Layout = ({ children }) => {
   return (
@@ -8,7 +7,7 @@ const Layout = ({ children }) => {
       <header>
         <Navbar />
       </header>
-      <Theme />
+
       <main>{children}</main>
       <footer>Footer</footer>
     </div>

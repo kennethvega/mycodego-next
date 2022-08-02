@@ -10,8 +10,9 @@ export default function Home() {
         {!user && (
           <div className={styles.message}>
             <h1>
-              Welcome to DevCodes. 👋 This app is a documentation platform for
-              developers. Login to create your own coding documentation.
+              Welcome to DeveloperDocs. 👋 This app is a documentation platform
+              for developers. Login to create your own coding documentation and
+              share it to the world.
             </h1>
           </div>
         )}

@@ -7,18 +7,18 @@
   align-items: center;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 0 1rem;
-  max-width: 120rem;
+  padding: 0 2rem;
+  max-width: 100rem;
   transition: all 0.3s;
-  height: 11rem;
+  height: 8rem;
 
   & .logo {
     font-size: 3rem;
     text-decoration: none;
     color: var(--text);
     a {
-      font-size: 4rem;
-      font-weight: 800;
+      font-size: 2.5rem;
+      font-weight: 600;
       text-decoration: none;
       color: var(--text);
       transition: all 0.3s;
@@ -33,7 +33,7 @@
       color: var(--text);
       text-decoration: none;
       font-size: 2rem;
-      font-weight: 600;
+      font-weight: 500;
       transition: all 0.3s;
       &:hover {
         color: var(--hover-text);
