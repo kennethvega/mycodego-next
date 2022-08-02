@@ -32,10 +32,15 @@
 body {
   font-family: "Inter", sans-serif;
   color: var(--primary-color);
-  background-color: var(--bg-color);
+  background-color: var(--background-color);
   margin: 0 auto;
   overflow-x: hidden;
 }
 html {
   font-size: 62.5%;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: var(--text);
 }
