@@ -3,3 +3,13 @@
   align-items: center;
   justify-content: center;
 }
+.message {
+  text-align: center;
+  max-width: 60rem;
+  padding: 2rem;
+  background-color: var(--gray-bg);
+  border-radius: 10px;
+  & h1 {
+    line-height: 1.6;
+  }
+}

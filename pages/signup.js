@@ -4,7 +4,7 @@ const signup = () => {
   return (
     <div className="container">
       <form className="form">
-        <h2>Signup</h2>
+        <h2>Sign up</h2>
         <label>
           <span>Email:</span>
           <input type="email" required />
