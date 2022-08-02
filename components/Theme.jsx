@@ -1,8 +1,9 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 import styles from "./Theme.module.scss";
+
 const Theme = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
