@@ -13,9 +13,6 @@ const Navbar = () => {
         <div>
           <ul className={styles.list}>
             <li>
-              <Link href="/signup">Sign up</Link>
-            </li>
-            <li>
               <Link href="/login">Login</Link>
             </li>
             <Theme />

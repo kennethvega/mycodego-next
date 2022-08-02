@@ -20,12 +20,18 @@
     background-color: var(--hover-text);
   }
 }
+// margins
+
+.margin-top-sm {
+  margin-top: 2rem;
+}
 
 // form
 .form {
   max-width: 50rem;
   margin: 1rem auto;
   padding: 1rem;
+  border-radius: 0;
 
   & label {
     display: block;
@@ -35,7 +41,7 @@
   }
   & span {
     display: block;
-    margin: 5px auto;
+    margin: 1rem auto;
     color: var(--text);
   }
   & input {
@@ -43,5 +49,22 @@
     font-size: 1.4rem;
     color: var(--text);
     width: 100%;
+  }
+}
+.signup-message {
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  color: var(--text);
+  font-weight: 400;
+
+  a {
+    color: var(--text);
+    padding: 3px;
+    font-weight: 900;
+    text-decoration: none;
+    border-bottom: 1px solid var(--text);
+    &:hover {
+      color: var(--hover-text);
+    }
   }
 }
