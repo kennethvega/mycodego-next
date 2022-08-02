@@ -17,7 +17,7 @@ const Theme = () => {
   };
 
   return (
-    <div className="container">
+    <div className={styles["theme-container"]}>
       <div className={styles["toggle-icon-container"]}>
         {theme === "light" ? (
           <BsFillMoonFill
