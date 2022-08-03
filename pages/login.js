@@ -4,6 +4,11 @@ const login = () => {
   return (
     <div className="container">
       <form className="form">
+        <div className="demo-details">
+          <p>Demo account 🧑:</p>
+          <span>Email: johndoe@gmail.com</span>
+          <span>Password: password</span>
+        </div>
         <h2>Login</h2>
         <label>
           <span>Email:</span>

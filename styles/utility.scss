@@ -54,6 +54,8 @@
     font-size: 1.8rem;
     color: var(--text);
     width: 100%;
+    border: 1px solid var(--line-color);
+    background-color: var(--background-color);
   }
 }
 .signup-message {
@@ -71,5 +73,21 @@
     &:hover {
       color: var(--hover-text);
     }
+  }
+}
+.demo-details {
+  padding: 2rem;
+  background-color: var(--gray-bg);
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  p {
+    font-size: 2rem;
+    color: var(--text);
+    font-size: 400;
+  }
+  span {
+    font-size: 2rem;
+    color: var(--text);
+    font-size: 400;
   }
 }

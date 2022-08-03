@@ -2,7 +2,7 @@ import styles from "../styles/home.module.scss";
 import { useState } from "react";
 import DocumentCard from "../components/DocumentCard";
 export default function Home() {
-  const user = true;
+  const user = null;
   const [docs, setDocs] = useState(null);
 
   return (
