@@ -20,6 +20,11 @@ export default function Home() {
         )}
       </div>
       <div className={styles["documents-container"]}>
+        <input
+          type="text"
+          className={styles.search}
+          placeholder="Search a doc"
+        />
         <h3 className={styles["post-title"]}>Documentations</h3>
         <div className={styles["card-container"]}>
           <DocumentCard />
