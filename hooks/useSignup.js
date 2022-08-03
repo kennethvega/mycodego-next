@@ -2,20 +2,23 @@ import { useState } from "react";
 import { auth } from "../firebase-config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
+
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
-  const { dispatch } = useAuthContext;
+  const { dispatch } = useAuthContext();
 
   const signup = async (email, password, displayName) => {
     setError(null);
     setIsPending(true);
     try {
+      // signup user
       await createUserWithEmailAndPassword(auth, email, password).then(
         async ({ user }) => {
           await updateProfile(user, {
             displayName: displayName,
           });
+          //   dispatch login function
           dispatch({ type: "LOGIN", payload: user });
         }
       );
@@ -27,5 +30,5 @@ export const useSignup = () => {
       setIsPending(false);
     }
   };
-  return { error, signup, isPending };
+  return { signup, error, isPending };
 };
