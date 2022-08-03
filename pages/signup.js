@@ -5,9 +5,15 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const { error, signup } = useSignup();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signup(email, password, displayName);
+  };
+
   return (
     <div className="container">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h2>Sign up</h2>
         <label>
           <span>Email:</span>
@@ -39,8 +45,8 @@ const Signup = () => {
             value={displayName}
           />
         </label>
-        <button className="btn margin-top-sm">Sign up</button>
         {error && <p className="error">{error}</p>}
+        <button className="btn margin-top-sm">Sign up</button>
       </form>
     </div>
   );
