@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-const login = () => {
+const Login = () => {
   return (
     <div className="container">
       <form className="form">
@@ -21,11 +21,11 @@ const login = () => {
         <button className="btn margin-top-sm">Log in</button>
         <h3 className="signup-message">
           Don&apos;t have an account ? sign up here{"  "}
-          <Link href="/signup">Sign up</Link>
+          <Link href="/Signup">Sign up</Link>
         </h3>
       </form>
     </div>
   );
 };
 
-export default login;
+export default Login;

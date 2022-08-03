@@ -13,7 +13,7 @@ const Navbar = () => {
         <div>
           <ul className={styles.list}>
             <li>
-              <Link href="/login">Login</Link>
+              <Link href="/Login">Login</Link>
             </li>
             <Theme />
           </ul>
