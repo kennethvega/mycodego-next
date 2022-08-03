@@ -1,7 +1,9 @@
 import styles from "../styles/home.module.scss";
-
+import { useState } from "react";
+import DocumentCard from "../components/DocumentCard";
 export default function Home() {
-  const user = null;
+  const user = true;
+  const [docs, setDocs] = useState(null);
 
   return (
     <div className="container">
@@ -16,6 +18,19 @@ export default function Home() {
             </h1>
           </div>
         )}
+      </div>
+      <div className={styles["documents-container"]}>
+        <h3 className={styles["post-title"]}>Documentations</h3>
+        <div className={styles["card-container"]}>
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+        </div>
       </div>
     </div>
   );

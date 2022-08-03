@@ -1,5 +1,5 @@
 .container {
-  max-width: 100rem;
+  max-width: 95rem;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -32,12 +32,17 @@
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 0;
+  & h2 {
+    font-size: 2.5rem;
+    color: var(--text);
+    margin-bottom: 2rem;
+  }
 
   & label {
     display: block;
     margin: 2rem auto;
     font-size: 1.8rem;
-    font-weight: 600;
+    font-weight: 400;
   }
   & span {
     display: block;
@@ -46,7 +51,7 @@
   }
   & input {
     padding: 8px 6px;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     color: var(--text);
     width: 100%;
   }
@@ -60,7 +65,7 @@
   a {
     color: var(--text);
     padding: 3px;
-    font-weight: 900;
+    font-weight: 600;
     text-decoration: none;
     border-bottom: 1px solid var(--text);
     &:hover {

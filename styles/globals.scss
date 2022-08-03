@@ -11,11 +11,11 @@
 }
 [data-theme="dark"] {
   // dark theme
-  --background-color: #2f2f2f;
+  --background-color: #1e1e1e;
   --text: #ffff;
   --hover-text: #e3e3e3;
-  --gray-bg: #454545;
-  --hover-bg: #505050;
+  --gray-bg: #2e2e2e;
+  --hover-gray-bg: #363636;
   --line-color: #5f5f5f;
 }
 
@@ -38,9 +38,4 @@ body {
 }
 html {
   font-size: 62.5%;
-}
-
-h2 {
-  font-size: 2.5rem;
-  color: var(--text);
 }

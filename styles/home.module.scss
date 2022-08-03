@@ -13,3 +13,22 @@
     line-height: 1.6;
   }
 }
+
+.documents-container {
+  margin-top: 5rem;
+
+  & .post-title {
+    text-align: center;
+    color: var(--text);
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+}
+.card-container {
+  margin-top: 2rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
