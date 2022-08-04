@@ -1,10 +1,10 @@
 import styles from "../styles/home.module.scss";
 import { useState } from "react";
 import DocumentCard from "../components/DocumentCard";
+import { useAuthContext } from "../hooks/useAuthContext";
 export default function Home() {
-  const user = null;
   const [docs, setDocs] = useState(null);
-
+  const { user } = useAuthContext();
   return (
     <div className="container">
       <div className={styles["btn-container"]}>

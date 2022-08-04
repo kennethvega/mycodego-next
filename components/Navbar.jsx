@@ -2,8 +2,12 @@ import React from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import Theme from "./Theme";
+import { useAuthContext } from "../hooks/useAuthContext";
 
+import ProfileDropdown from "./ProfileDropdown";
 const Navbar = () => {
+  const { user } = useAuthContext();
+
   return (
     <div className={styles["nav-container"]}>
       <div className={styles.container}>
@@ -12,10 +16,14 @@ const Navbar = () => {
         </div>
         <div>
           <ul className={styles.list}>
-            <li>
-              <Link href="/Login">Login</Link>
-            </li>
+            {!user && (
+              <li>
+                <Link href="/Login">Login</Link>
+              </li>
+            )}
+
             <Theme />
+            {user && <ProfileDropdown />}
           </ul>
         </div>
       </div>
