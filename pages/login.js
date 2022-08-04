@@ -14,7 +14,7 @@ const Login = () => {
 
   return (
     <div className="container">
-      <form className="form" onClick={() => handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <div className="demo-details">
           <p>Demo account 🧑:</p>
           <span>Email: johndoe@gmail.com</span>
@@ -25,9 +25,9 @@ const Login = () => {
           <span>Email:</span>
           <input
             type="email"
-            required
             placeholder="johndoe@gmail.com"
             onChange={(e) => setEmail(e.target.value)}
+            required
             value={email}
           />
         </label>
