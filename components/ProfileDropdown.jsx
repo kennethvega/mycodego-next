@@ -22,7 +22,10 @@ const ProfileDropdown = () => {
         <div className={styles["dropdown-container"]}>
           <div className={styles.dropdown}>
             <Link href="/Profile">
-              <div className={styles["dropdown-item"]}>
+              <div
+                className={styles["dropdown-item"]}
+                onClick={() => setOpen(!open)}
+              >
                 <BsFillPersonFill /> <span>Profile</span>
               </div>
             </Link>

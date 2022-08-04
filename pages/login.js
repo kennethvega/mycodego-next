@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLogin } from "../hooks/useLogin";
 import Loader from "../components/Loader";
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const { login, error, isPending } = useLogin();

@@ -4,11 +4,12 @@ import { useState } from "react";
 // firebase imports
 import { auth } from "../firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { useRouter } from "next/router";
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
   const { dispatch } = useAuthContext();
+  const router = useRouter();
 
   const login = (email, password) => {
     setError(null);
@@ -18,6 +19,7 @@ export const useLogin = () => {
         dispatch({ type: "LOGIN", payload: res.user });
         setIsPending(false);
         setError(null);
+        router.push("/");
       })
       .catch((err) => {
         console.log(err.message);

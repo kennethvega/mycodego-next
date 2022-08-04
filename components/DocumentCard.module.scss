@@ -1,11 +1,10 @@
 .container {
   width: 40rem;
   height: 25rem;
-
   padding: 2rem;
   background-color: var(--gray-bg);
   cursor: pointer;
-  transition: all 0.3s;
+
   &:hover {
     background-color: var(--hover-gray-bg);
   }
