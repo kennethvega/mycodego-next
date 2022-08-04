@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import Loader from "../components/Loader";
 import { useSignup } from "../hooks/useSignup";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
-  const { error, signup } = useSignup();
+  const { error, signup, isPending } = useSignup();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +47,12 @@ const Signup = () => {
           />
         </label>
         {error && <p className="error">{error}</p>}
-        <button className="btn margin-top-sm">Sign up</button>
+        {isPending && (
+          <button className="btn margin-top-sm" disabled>
+            Loading <Loader />
+          </button>
+        )}
+        {!isPending && <button className="btn margin-top-sm">Sign up</button>}
       </form>
     </div>
   );
