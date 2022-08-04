@@ -16,19 +16,22 @@
   height: 2.5rem;
   color: var(--text);
 }
-.dropdown {
+
+.dropdown-container {
   position: absolute;
-  top: 65px;
-  right: 0;
+  top: 70px;
+  right: -20%;
+}
+.dropdown {
+  position: relative;
   background-color: var(--gray-bg);
-  width: 15rem;
+  width: 20rem;
   border: 1px solid var(--line-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  overflow: hidden;
+  border-radius: 3px;
 
   &-item {
     padding: 1rem;
@@ -42,5 +45,22 @@
     &:hover {
       background-color: var(--hover-gray-bg);
     }
+    &:last-child {
+      border-top: 1px solid var(--line-color);
+    }
+  }
+  &::after {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-top: 1px solid var(--line-color);
+    border-bottom: 0px solid var(--line-color);
+    border-left: 1px solid var(--line-color);
+    border-right: 0px solid var(--line-color);
+    background-color: var(--gray-bg);
+    top: -16%;
+    left: 78%;
+    content: "";
+    transform: rotate(45deg);
   }
 }

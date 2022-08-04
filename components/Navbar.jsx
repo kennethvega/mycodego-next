@@ -7,25 +7,27 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import ProfileDropdown from "./ProfileDropdown";
 const Navbar = () => {
   const { user } = useAuthContext();
-
+  console.log(user);
   return (
     <div className={styles["nav-container"]}>
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link href="/">DeveloperDocs</Link>
         </div>
-        <div>
-          <ul className={styles.list}>
-            {!user && (
-              <li>
-                <Link href="/Login">Login</Link>
-              </li>
-            )}
-
+        {!user && (
+          <div className={styles.list}>
+            <Link href="/Login">
+              <p className={styles.login}>Login</p>
+            </Link>
             <Theme />
-            {user && <ProfileDropdown />}
-          </ul>
-        </div>
+          </div>
+        )}
+        {user && (
+          <div className={styles.list}>
+            <Theme />
+            <ProfileDropdown />
+          </div>
+        )}
       </div>
     </div>
   );
