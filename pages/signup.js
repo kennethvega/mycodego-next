@@ -60,7 +60,7 @@ const Signup = () => {
         </label>
         {error && <p className="error">{error}</p>}
         {isPending && (
-          <button className="btn margin-top-sm" disabled>
+          <button className="btn margin-top-sm center-items" disabled>
             Loading <Loader />
           </button>
         )}

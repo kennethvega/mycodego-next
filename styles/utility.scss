@@ -20,10 +20,22 @@
     background-color: var(--hover-text);
   }
 }
+
+.btn-sm {
+  padding: 0.8rem 2rem !important;
+  font-size: 1.5rem;
+}
+
+.center-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 // margins
 
 .margin-top-sm {
-  margin-top: 2rem;
+  margin-top: 3rem;
 }
 
 // form

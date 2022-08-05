@@ -17,7 +17,7 @@ const Navbar = () => {
         {!user && (
           <div className={styles.list}>
             <Link href="/Login">
-              <p className={styles.login}>Login</p>
+              <p className="btn btn-sm">Login</p>
             </Link>
             <Theme />
           </div>

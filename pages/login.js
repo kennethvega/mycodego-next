@@ -28,8 +28,8 @@ const Login = () => {
       <form className="form" onSubmit={handleSubmit}>
         <div className="demo-details">
           <p>Demo account 🧑:</p>
-          <span>Email: johndoe@gmail.com</span>
-          <span>Password: password</span>
+          <span>Email:johndoe@gmail.com</span>
+          <span>Password:password</span>
         </div>
         <h2>Login</h2>
         <label>
@@ -54,7 +54,7 @@ const Login = () => {
         </label>
         {error && <p className="error">{error}</p>}
         {isPending && (
-          <button className="btn margin-top-sm" disabled>
+          <button className="btn margin-top-sm center-items" disabled>
             Loading <Loader />
           </button>
         )}

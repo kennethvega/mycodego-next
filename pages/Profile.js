@@ -13,7 +13,11 @@ const Profile = () => {
     }
   });
 
-  return <div>profile</div>;
+  return (
+    <div className="container">
+      <div className="">asdasd</div>
+    </div>
+  );
 };
 
 export default Profile;
