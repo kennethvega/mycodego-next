@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Loader from "../components/Loader";
 import { useSignup } from "../hooks/useSignup";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useRouter } from "next/router";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const { error, signup, isPending } = useSignup();
+  const { user } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user === null) {
+      return;
+    } else {
+      router.push("/");
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();

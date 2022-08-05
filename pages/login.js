@@ -2,17 +2,27 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLogin } from "../hooks/useLogin";
 import Loader from "../components/Loader";
-
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useRouter } from "next/router";
 const Login = () => {
   const [email, setEmail] = useState("");
   const { login, error, isPending } = useLogin();
   const [password, setPassword] = useState("");
+  const { user } = useAuthContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user === null) {
+      return;
+    } else {
+      router.push("/");
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password);
   };
-
   return (
     <div className="container">
       <form className="form" onSubmit={handleSubmit}>
