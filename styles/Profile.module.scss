@@ -1,0 +1,22 @@
+.profile-info {
+  display: flex;
+  gap: 4rem;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+.profile-image {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.info {
+  display: flex;
+  align-self: flex-start;
+  gap: 3rem;
+}
+.name {
+  font-size: 3rem;
+  color: var(--text);
+  font-weight: 400;
+}
