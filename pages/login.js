@@ -58,7 +58,9 @@ const Login = () => {
             Loading <Loader />
           </button>
         )}
-        {!isPending && <button className="btn margin-top-sm">Login</button>}
+        {!isPending && (
+          <button className="btn margin-top-sm center-items">Login</button>
+        )}
         <h3 className="signup-message">
           Don&apos;t have an account ? sign up here{"  "}
           <Link href="/Signup">Sign up</Link>
