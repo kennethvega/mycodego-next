@@ -2,7 +2,7 @@
   display: flex;
   gap: 4rem;
   margin: 0 auto;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 .profile-image {
@@ -12,11 +12,33 @@
 
 .info {
   display: flex;
-  align-self: flex-start;
-  gap: 3rem;
+  max-width: 40rem;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  & p {
+    font-size: 1.5rem;
+  }
 }
 .name {
   font-size: 3rem;
   color: var(--text);
   font-weight: 400;
+}
+.top-container {
+  display: flex;
+  gap: 3rem;
+}
+.documents-container {
+  border-top: 1px solid var(--line-color);
+  margin-top: 6rem;
+  composes: documents-container from "./home.module.scss";
+}
+
+.post-title {
+  composes: post-title from "./home.module.scss";
+}
+.card-container {
+  composes: card-container from "./home.module.scss";
 }

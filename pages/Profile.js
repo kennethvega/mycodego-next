@@ -3,6 +3,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useRouter } from "next/router";
 import styles from "../styles/Profile.module.scss";
 import Image from "next/image";
+import DocumentCard from "../components/DocumentCard";
 const Profile = () => {
   const { user } = useAuthContext();
   const router = useRouter();
@@ -27,9 +28,31 @@ const Profile = () => {
           />
         </div>
         <div className={styles.info}>
-          <h2 className={styles.name}>John Doe</h2>
-          <button className="btn btn-sm">Edit profile</button>
+          <div className={styles["top-container"]}>
+            <h2 className={styles.name}>John Doe</h2>
+            <button className="btn btn-sm">Edit profile</button>
+          </div>
+          <p>
+            I Love Programming Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Sequi, explicabo culpa dolore accusantium
+            voluptates tempore possimus
+          </p>
           <p>Documents: 4</p>
+        </div>
+      </div>
+
+      <div className={styles["documents-container"]}>
+        <h3 className={styles["post-title"]}>Posted Docs</h3>
+        <div className={styles["card-container"]}>
+          {/* map this later */}
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
+          <DocumentCard />
         </div>
       </div>
     </div>
