@@ -2,6 +2,7 @@ import styles from "../styles/home.module.scss";
 import { useState } from "react";
 import DocumentCard from "../components/DocumentCard";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Link from "next/link";
 
 export default function Home() {
   const [docs, setDocs] = useState(null);
@@ -10,7 +11,11 @@ export default function Home() {
   return (
     <div className="container">
       <div className={styles["btn-container"]}>
-        {user && <button className="btn">Create a doc</button>}
+        {user && (
+          <Link href="/CreateDoc">
+            <button className="btn">Create a doc</button>
+          </Link>
+        )}
         {!user && (
           <div className={styles.message}>
             <h1>
