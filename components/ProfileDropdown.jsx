@@ -4,9 +4,11 @@ import { IoMdLogOut } from "react-icons/io";
 import styles from "./ProfileDropdown.module.scss";
 import Link from "next/link";
 import { useLogout } from "../hooks/useLogout";
-
+import { useAuthContext } from "../hooks/useAuthContext";
+import Image from "next/image";
 const ProfileDropdown = () => {
   const { logout } = useLogout();
+  const { user } = useAuthContext();
 
   const [open, setOpen] = useState(false);
   return (
@@ -15,7 +17,16 @@ const ProfileDropdown = () => {
         className={styles["profile-container"]}
         onClick={() => setOpen(!open)}
       >
-        <BsFillPersonFill className={styles.profile} />
+        {user?.photoUrl ? (
+          <Image
+            src={user?.photoUrl}
+            width={30}
+            height={30}
+            alt="profile avatar"
+          />
+        ) : (
+          <BsFillPersonFill className={styles.profile} />
+        )}
       </div>
 
       {open && (

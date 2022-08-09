@@ -12,7 +12,7 @@ const Navbar = () => {
     <div className={styles["nav-container"]}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          <Link href="/">DeveloperDocs</Link>
+          <Link href="/">DevCreate</Link>
         </div>
         {!user && (
           <div className={styles.list}>
