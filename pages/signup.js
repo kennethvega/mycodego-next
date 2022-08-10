@@ -21,7 +21,9 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const userNameExist = await doesUserNameExist;
+    // make a hook that fetch data of users collection
+    // if(displayname === username) return error message the username is already taken
+    // else{signup(email,password,userName)}
     signup(email, password, userName);
   };
 
