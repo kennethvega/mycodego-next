@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [displayName, setDisplayName] = useState("");
+  const [userName, setUserName] = useState("");
   const { error, signup, isPending } = useSignup();
   const { user } = useAuthContext();
   const router = useRouter();
@@ -19,9 +19,10 @@ const Signup = () => {
     }
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signup(email, password, displayName);
+    // const userNameExist = await doesUserNameExist;
+    signup(email, password, userName);
   };
 
   return (
@@ -49,13 +50,13 @@ const Signup = () => {
           />
         </label>
         <label>
-          <span>Display name:</span>
+          <span>User name:</span>
           <input
             type="text"
             required
             placeholder="john"
-            onChange={(e) => setDisplayName(e.target.value)}
-            value={displayName}
+            onChange={(e) => setUserName(e.target.value)}
+            value={userName}
           />
         </label>
         {error && <p className="error">{error}</p>}
