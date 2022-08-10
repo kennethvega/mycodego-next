@@ -3,6 +3,7 @@ import { useState } from "react";
 import DocumentCard from "../components/DocumentCard";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Link from "next/link";
+import PostFeed from "../components/PostFeed";
 
 export default function Home() {
   const [docs, setDocs] = useState(null);
@@ -34,14 +35,7 @@ export default function Home() {
         />
         <h3 className={styles["post-title"]}>Documentations</h3>
         <div className={styles["card-container"]}>
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
+          <PostFeed />
         </div>
       </div>
     </div>

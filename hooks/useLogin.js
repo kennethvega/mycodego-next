@@ -2,7 +2,7 @@ import { useAuthContext } from "./useAuthContext";
 
 import { useState } from "react";
 // firebase imports
-import { auth } from "../firebase-config";
+import { auth } from "../lib/firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 export const useLogin = () => {

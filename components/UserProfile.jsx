@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/Profile.module.scss";
 import Image from "next/image";
 import DocumentCard from "../components/DocumentCard";
-const Profile = () => {
+const UserProfile = () => {
   const { user } = useAuthContext();
   const router = useRouter();
 
@@ -43,20 +43,9 @@ const Profile = () => {
 
       <div className={styles["documents-container"]}>
         <h3 className={styles["post-title"]}>Posted Docs</h3>
-        <div className={styles["card-container"]}>
-          {/* map this later */}
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-          <DocumentCard />
-        </div>
       </div>
     </div>
   );
 };
 
-export default Profile;
+export default UserProfile;

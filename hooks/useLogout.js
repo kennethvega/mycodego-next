@@ -1,4 +1,4 @@
-import { auth } from "../firebase-config";
+import { auth } from "../lib/firebase-config";
 import { signOut } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
 import { useRouter } from "next/router";
