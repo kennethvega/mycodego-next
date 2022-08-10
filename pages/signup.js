@@ -36,7 +36,6 @@ const Signup = () => {
           <input
             type="email"
             required
-            placeholder="johndoe@gmail.com"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
           />
@@ -46,7 +45,6 @@ const Signup = () => {
           <input
             type="password"
             required
-            placeholder="password"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
@@ -56,7 +54,6 @@ const Signup = () => {
           <input
             type="text"
             required
-            placeholder="john"
             onChange={(e) => setUserName(e.target.value)}
             value={userName}
           />
