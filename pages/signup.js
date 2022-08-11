@@ -3,6 +3,7 @@ import Loader from "../components/Loader";
 import { useSignup } from "../hooks/useSignup";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useRouter } from "next/router";
+import Link from "next/link";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,8 +23,13 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // make a hook that fetch data of users collection
-    // if(displayname === username) return error message the username is already taken
+    // try{
+    // if(displayname !== username) return signup(email,password,username)
+    // }catch(err){
+    
+    }
     // else{signup(email,password,userName)}
+    // 
     signup(email, password, userName);
   };
 
@@ -65,6 +71,10 @@ const Signup = () => {
           </button>
         )}
         {!isPending && <button className="btn margin-top-sm">Sign up</button>}
+        <h3 className="signup-message">
+          Already have an account ?{"  "}
+          <Link href="/Login">Log in</Link>
+        </h3>
       </form>
     </div>
   );

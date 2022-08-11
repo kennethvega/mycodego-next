@@ -13,5 +13,5 @@ export async function doesUserNameExist(username) {
     console.log(doc.id, " => ", doc.data());
   });
 }
-doesUserNameExist("john");
+
 /////////////////////////////////////////
