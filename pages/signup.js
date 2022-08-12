@@ -22,14 +22,6 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // make a hook that fetch data of users collection
-    // try{
-    // if(displayname !== username) return signup(email,password,username)
-    // }catch(err){
-    
-    }
-    // else{signup(email,password,userName)}
-    // 
     signup(email, password, userName);
   };
 
