@@ -43,3 +43,30 @@ html {
   font-size: 2rem;
   color: red;
 }
+.not-found {
+  margin-top: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  & h1 {
+    font-size: 5rem;
+    color: var(--text);
+  }
+  & h2 {
+    font-size: 3rem;
+    color: var(--text);
+  }
+  & p {
+    font-size: 2rem;
+    & a {
+      font-weight: 900;
+      color: var(--text);
+      text-decoration: none;
+      &:hover {
+        color: var(--hover-text);
+      }
+    }
+  }
+}
