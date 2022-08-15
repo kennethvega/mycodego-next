@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styles from "../styles/Profile.module.scss";
 import Image from "next/image";
 import DocumentCard from "../components/DocumentCard";
-const UserProfile = () => {
+const UserProfile = ({ userDetail }) => {
   const { user } = useAuthContext();
   const router = useRouter();
 

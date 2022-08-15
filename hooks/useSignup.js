@@ -24,7 +24,6 @@ export const useSignup = () => {
     );
     const querySnapshot = await getDocs(q);
     const userNameTaken = querySnapshot.docs.length > 0;
-
     if (!userNameTaken) {
       console.log(userNameTaken);
       try {
@@ -34,14 +33,13 @@ export const useSignup = () => {
             await updateProfile(user, {
               displayName: userName,
             });
+            // add to database
             await addDoc(collection(db, "users"), {
               userId: user.uid,
               username: userName.toLowerCase(),
               emailAddress: email.toLowerCase(),
               dateCreated: Date.now(),
             });
-
-            // add to database
 
             dispatch({ type: "LOGIN", payload: user });
             router.push("/");
