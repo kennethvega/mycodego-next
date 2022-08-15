@@ -19,6 +19,9 @@ const Navbar = () => {
             <Link href="/Login">
               <p className="btn btn-sm">Login</p>
             </Link>
+            <Link href="/Signup">
+              <p className={styles["signup-btn"]}>Sign up</p>
+            </Link>
             <Theme />
           </div>
         )}

@@ -44,3 +44,12 @@
     color: var(--hover-text);
   }
 }
+.signup-btn {
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    color: var(--hover-text);
+  }
+}
