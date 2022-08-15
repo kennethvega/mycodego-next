@@ -8,8 +8,8 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import Image from "next/image";
 const ProfileDropdown = () => {
   const { logout } = useLogout();
-  const { user } = useAuthContext();
-
+  const { user, username } = useAuthContext();
+  console.log(username);
   const [open, setOpen] = useState(false);
   return (
     <div className={styles.container}>
@@ -32,7 +32,8 @@ const ProfileDropdown = () => {
       {open && (
         <div className={styles["dropdown-container"]}>
           <div className={styles.dropdown}>
-            <Link href="/Profile">
+            {/* edit this */}
+            <Link href={`/${username}`}>
               <div
                 className={styles["dropdown-item"]}
                 onClick={() => setOpen(!open)}
@@ -40,6 +41,7 @@ const ProfileDropdown = () => {
                 <BsFillPersonFill /> <span>Profile</span>
               </div>
             </Link>
+
             <div className={styles["dropdown-item"]} onClick={logout}>
               <IoMdLogOut /> <span>Logout</span>
             </div>

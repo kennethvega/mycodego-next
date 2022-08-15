@@ -62,7 +62,9 @@ const Signup = () => {
             Loading <Loader />
           </button>
         )}
-        {!isPending && <button className="btn margin-top-sm">Sign up</button>}
+        {!isPending && (
+          <button className="btn margin-top-sm center-items">Sign up</button>
+        )}
         <h3 className="signup-message">
           Already have an account ?{"  "}
           <Link href="/Login">Log in</Link>
