@@ -40,7 +40,7 @@
 
 // form
 .form {
-  max-width: 70rem;
+  max-width: 50rem;
   margin: 1rem auto;
   padding: 1rem;
   border-radius: 0;
@@ -70,6 +70,13 @@
     border: 1px solid var(--line-color);
     background-color: var(--background-color);
   }
+  &textarea {
+    color: var(--text);
+    border: 1px solid var(--line-color);
+  }
+}
+.mx-width-large {
+  max-width: 70rem !important;
 }
 .signup-message {
   font-size: 1.8rem;

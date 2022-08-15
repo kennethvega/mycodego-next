@@ -3,7 +3,7 @@ import React from "react";
 const CreateDoc = () => {
   return (
     <div className="container">
-      <div className="form">
+      <div className="form mx-width-large">
         <h2>Create a doc</h2>
         <label>
           <span>Title:</span>
