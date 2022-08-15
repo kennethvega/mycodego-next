@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useRouter } from "next/router";
-import styles from "../styles/Profile.module.scss";
+import styles from "./UserProfile.module.scss";
 import Image from "next/image";
 import DocumentCard from "../components/DocumentCard";
 const UserProfile = ({ userDetail }) => {

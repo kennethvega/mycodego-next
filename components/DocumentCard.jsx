@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./DocumentCard.module.scss";
 import Link from "next/link";
-const DocumentCard = ({ post, key, admin }) => {
+const DocumentCard = ({ post, key, admin = false }) => {
   return (
-    <Link href={`${post.username}/${post.slug}`}>
+    <Link href={`/pages${post.userId}/${post.slug}`}>
       <div className={styles.container}>
         <h3>{post.title}</h3>
         <p>{post.summary}</p>

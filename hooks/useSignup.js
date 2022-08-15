@@ -4,7 +4,15 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
 import { useRouter } from "next/router";
 
-import { addDoc, collection, query, where, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 import { db } from "../lib/firebase-config";
 export const useSignup = () => {
   const [error, setError] = useState(null);
@@ -16,7 +24,6 @@ export const useSignup = () => {
   const signup = async (email, password, userName) => {
     setError(null);
     setIsPending(true);
-
     // check if username already exist
     const q = query(
       collection(db, "users"),
@@ -24,8 +31,8 @@ export const useSignup = () => {
     );
     const querySnapshot = await getDocs(q);
     const userNameTaken = querySnapshot.docs.length > 0;
+
     if (!userNameTaken) {
-      console.log(userNameTaken);
       try {
         // 3.signup user
         await createUserWithEmailAndPassword(auth, email, password).then(
@@ -33,12 +40,17 @@ export const useSignup = () => {
             await updateProfile(user, {
               displayName: userName,
             });
-            // add to database
+            // add to database users
             await addDoc(collection(db, "users"), {
               userId: user.uid,
               username: userName.toLowerCase(),
               emailAddress: email.toLowerCase(),
               dateCreated: Date.now(),
+            });
+            // add to database username
+            const username = userName.toLowerCase();
+            await setDoc(doc(db, "username", username), {
+              uid: user.uid,
             });
 
             dispatch({ type: "LOGIN", payload: user });
