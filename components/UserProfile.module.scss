@@ -33,12 +33,12 @@
 .documents-container {
   border-top: 1px solid var(--line-color);
   margin-top: 6rem;
-  composes: documents-container from "./home.module.scss";
+  composes: documents-container from "./../styles/home.module.scss";
 }
 
 .post-title {
-  composes: post-title from "./home.module.scss";
+  composes: post-title from "./../styles/home.module.scss";
 }
 .card-container {
-  composes: card-container from "./home.module.scss";
+  composes: card-container from "./../styles/home.module.scss";
 }

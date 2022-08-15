@@ -3,16 +3,8 @@ import { auth } from "../lib/firebase-config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
 import { useRouter } from "next/router";
-
-import {
-  addDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-  setDoc,
-  doc,
-} from "firebase/firestore";
+import { getUserWithUsername } from "../lib/firebase-config";
+import { setDoc, doc, addDoc, collection } from "firebase/firestore";
 import { db } from "../lib/firebase-config";
 export const useSignup = () => {
   const [error, setError] = useState(null);
@@ -25,12 +17,14 @@ export const useSignup = () => {
     setError(null);
     setIsPending(true);
     // check if username already exist
-    const q = query(
-      collection(db, "users"),
-      where("username", "==", userName.toLowerCase())
-    );
-    const querySnapshot = await getDocs(q);
-    const userNameTaken = querySnapshot.docs.length > 0;
+    const userNameTaken = await getUserWithUsername(userName);
+
+    // const q = query(
+    //   collection(db, "users"),
+    //   where("username", "==", userName.toLowerCase())
+    // );
+    // const querySnapshot = await getDocs(q);
+    // const userNameTaken = querySnapshot.docs.length > 0;
 
     if (!userNameTaken) {
       try {

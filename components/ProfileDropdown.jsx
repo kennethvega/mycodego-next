@@ -9,7 +9,7 @@ import Image from "next/image";
 const ProfileDropdown = () => {
   const { logout } = useLogout();
   const { user, username } = useAuthContext();
-  console.log(username);
+
   const [open, setOpen] = useState(false);
   return (
     <div className={styles.container}>
