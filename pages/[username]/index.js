@@ -23,12 +23,12 @@ const UserProfilePage = ({ post, user }) => {
 export async function getServerSideProps({ query }) {
   const { username } = query;
 
-  const q = query(
-    collection(db, "users"),
-    where("username", "==", username.toLowerCase())
-  );
-  const userDoc = await getDocs(q);
-
+  // const q = query(
+  //   collection(db, "users"),
+  //   where("username", "==", username.toLowerCase())
+  // );
+  // const userDoc = await getDocs(q);
+  const userDoc = await getUserDoc(username);
   // JSON serialization data
   let user = null;
   let post = null;

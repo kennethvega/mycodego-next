@@ -19,13 +19,6 @@ export const useSignup = () => {
     // check if username already exist
     const userNameTaken = await getUserWithUsername(userName);
 
-    // const q = query(
-    //   collection(db, "users"),
-    //   where("username", "==", userName.toLowerCase())
-    // );
-    // const querySnapshot = await getDocs(q);
-    // const userNameTaken = querySnapshot.docs.length > 0;
-
     if (!userNameTaken) {
       try {
         // 3.signup user
@@ -41,7 +34,7 @@ export const useSignup = () => {
               emailAddress: email.toLowerCase(),
               dateCreated: Date.now(),
             });
-            // add to database username
+            // add to database username -- check on this later
             const username = userName.toLowerCase();
             await setDoc(doc(db, "username", username), {
               uid: user.uid,
@@ -63,11 +56,6 @@ export const useSignup = () => {
       setIsPending(false);
     }
   };
-  // check if username already exist if true throw error else signup users
-  //1. doesUserName NOT exist ? ==> fetch collection('users')-> where ('username' '==' userName)
-  //2. map the data then if(username == userName).length > 0
-  // then it exist ==> throw error 'username already exist'
-  // else
 
   return { signup, error, isPending };
 };
