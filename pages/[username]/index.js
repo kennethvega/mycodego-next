@@ -6,43 +6,36 @@ import {
   getUserPost,
   postToJSON,
 } from "../../lib/firebase-config";
-import { db } from "../../lib/firebase-config";
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  orderBy,
-  limit,
-} from "firebase/firestore";
-const UserProfilePage = ({ post, user }) => {
-  return (
-    <main>
-      <UserProfile userDetail={user} />
-      <PostFeed post={post} />
-    </main>
-  );
-};
-
 export async function getServerSideProps({ query }) {
   const { username } = query;
 
   const userDoc = await getUserDocWithUsername(username);
-
   // JSON serialization data
-
   let user = null;
-  let post = null;
+  let posts = null;
   // If no user, short circuit to 404 page
-  console.log(userDoc);
   if (userDoc) {
-    user = userDoc;
-    post = await getUserPost(username);
+    user = userDoc.data();
+    const postQuery = await getUserPost(username);
+    posts = postQuery.docs.map(postToJSON);
   }
 
   return {
-    props: { user, post },
+    props: {
+      posts,
+      user,
+    },
   };
 }
+
+const UserProfilePage = ({ posts, user }) => {
+  return (
+    <main>
+      <UserProfile userDetail={user} />
+      <PostFeed posts={posts} />
+      {console.log(posts)}
+    </main>
+  );
+};
 
 export default UserProfilePage;
