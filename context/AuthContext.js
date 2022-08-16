@@ -18,6 +18,7 @@ export const authReducer = (state, action) => {
         ...state,
         user: action.payload,
         authIsReady: true,
+        username: action.payload.displayName,
       };
     default:
       return state;
