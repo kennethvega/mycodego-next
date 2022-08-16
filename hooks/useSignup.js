@@ -3,7 +3,7 @@ import { auth } from "../lib/firebase-config";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
 import { useRouter } from "next/router";
-import { getUserWithUsername } from "../lib/firebase-config";
+import { checkUserWithUsername } from "../lib/firebase-config";
 import { setDoc, doc, addDoc, collection } from "firebase/firestore";
 import { db } from "../lib/firebase-config";
 export const useSignup = () => {
@@ -17,7 +17,7 @@ export const useSignup = () => {
     setError(null);
     setIsPending(true);
     // check if username already exist
-    const userNameTaken = await getUserWithUsername(userName);
+    const userNameTaken = await checkUserWithUsername(userName);
 
     if (!userNameTaken) {
       try {
@@ -34,7 +34,7 @@ export const useSignup = () => {
               emailAddress: email.toLowerCase(),
               dateCreated: Date.now(),
             });
-            // add to database username -- check on this later
+            // add to database username -- check on this
             const username = userName.toLowerCase();
             await setDoc(doc(db, "username", username), {
               uid: user.uid,

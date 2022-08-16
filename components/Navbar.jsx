@@ -7,7 +7,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import ProfileDropdown from "./ProfileDropdown";
 const Navbar = () => {
   const { user } = useAuthContext();
-  console.log(user);
+
   return (
     <div className={styles["nav-container"]}>
       <div className={styles.container}>

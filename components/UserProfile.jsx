@@ -29,7 +29,7 @@ const UserProfile = ({ userDetail }) => {
         </div>
         <div className={styles.info}>
           <div className={styles["top-container"]}>
-            <h2 className={styles.name}>{userDetail.username}</h2>
+            <h2 className={styles.name}>{userDetail?.username}</h2>
             <button className="btn btn-sm">Edit profile</button>
           </div>
           <p>
