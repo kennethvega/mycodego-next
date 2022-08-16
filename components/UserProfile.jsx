@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useRouter } from "next/router";
 import styles from "./UserProfile.module.scss";
@@ -7,6 +7,23 @@ import DocumentCard from "../components/DocumentCard";
 const UserProfile = ({ userDetail }) => {
   const { user } = useAuthContext();
   const router = useRouter();
+  const [name, setName] = useState("");
+  useEffect(() => {
+    const username = userDetail.username.split(" ");
+    const displayName = username
+      .map((dn) => {
+        return dn[0].toUpperCase() + dn.substring(1);
+      })
+      .join(" ");
+    setName(displayName);
+  }, [userDetail]);
+
+  // const mySentence = "freeCodeCamp is an awesome resource";
+  // const words = mySentence.split(" ");
+
+  // words.map((word) => {
+  //     return word[0].toUpperCase() + word.substring(1);
+  // }).join(" ");
 
   useEffect(() => {
     if (!user) {
@@ -29,15 +46,12 @@ const UserProfile = ({ userDetail }) => {
         </div>
         <div className={styles.info}>
           <div className={styles["top-container"]}>
-            <h2 className={styles.name}>{userDetail?.username}</h2>
+            <h2 className={styles.name}>{name}</h2>
+
             <button className="btn btn-sm">Edit profile</button>
           </div>
-          <p>
-            I Love Programming Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Sequi, explicabo culpa dolore accusantium
-            voluptates tempore possimus
-          </p>
-          <p>Documents: 4</p>
+          <p>{userDetail?.bio}</p>
+          <p>10 documents</p>
         </div>
       </div>
 
