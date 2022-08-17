@@ -7,9 +7,9 @@ import DocumentCard from "../components/DocumentCard";
 const UserProfile = ({ userDetail }) => {
   const { user } = useAuthContext();
   const router = useRouter();
-  const [name, setName] = useState("");
+  const [name, setName] = useState(null);
   useEffect(() => {
-    const username = userDetail.username.split(" ");
+    const username = userDetail?.username.split(" ");
     const displayName = username
       .map((dn) => {
         return dn[0].toUpperCase() + dn.substring(1);
@@ -17,13 +17,6 @@ const UserProfile = ({ userDetail }) => {
       .join(" ");
     setName(displayName);
   }, [userDetail]);
-
-  // const mySentence = "freeCodeCamp is an awesome resource";
-  // const words = mySentence.split(" ");
-
-  // words.map((word) => {
-  //     return word[0].toUpperCase() + word.substring(1);
-  // }).join(" ");
 
   useEffect(() => {
     if (!user) {

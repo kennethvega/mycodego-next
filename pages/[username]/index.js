@@ -22,10 +22,16 @@ export async function getServerSideProps({ query }) {
   const { username } = query;
 
   const userDoc = await getUserDocWithUsername(username);
+
+  // If no user, short circuit to 404 page
+  if (!userDoc) {
+    return {
+      notFound: true,
+    };
+  }
   // JSON serialization data
   let user = null;
   let posts = null;
-  // If no user, short circuit to 404 page
   if (userDoc) {
     user = userDoc.data();
     const postQuery = await getUserPost(username);
