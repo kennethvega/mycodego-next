@@ -24,7 +24,7 @@ const Login = () => {
     login(email, password);
   };
   return (
-    <div className="container">
+    <div className="container margin-top-xl">
       <form className="form" onSubmit={handleSubmit}>
         <div className="demo-details">
           <p>Demo account 🧑:</p>

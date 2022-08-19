@@ -23,7 +23,6 @@ export default UserProfilePage;
 
 export async function getServerSideProps({ query }) {
   const { username } = query;
-
   const userDoc = await getUserDocWithUsername(username);
   // If no user, short circuit to 404 page
   if (!userDoc) {

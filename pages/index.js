@@ -24,8 +24,8 @@ export default function Home({ posts }) {
         {!user && (
           <div className={styles.message}>
             <h1>
-              Welcome to DeveloperDocs. 👋 This app is a documentation platform
-              for developers. Login to create your own coding documentation and
+              Welcome to Mycodego. 👋 This app is a documentation platform for
+              developers. Login to create your own coding documentation and
               share it to the world.
             </h1>
           </div>

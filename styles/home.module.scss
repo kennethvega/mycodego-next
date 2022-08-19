@@ -9,9 +9,12 @@
   max-width: 60rem;
   padding: 2rem;
   background-color: var(--gray-bg);
-  border-radius: 10px;
+  border-radius: 1rem;
+
   & h1 {
     line-height: 1.6;
+    font-size: 1.7rem;
+    font-weight: 600;
   }
 }
 .search {
@@ -38,4 +41,3 @@
     margin-top: 3rem;
   }
 }
-

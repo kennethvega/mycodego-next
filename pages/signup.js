@@ -26,7 +26,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container margin-top-xl">
       <form className="form" onSubmit={handleSubmit}>
         <h2>Sign up</h2>
         <label>
