@@ -14,7 +14,7 @@ export default function Home({ posts }) {
   const { user } = useAuthContext();
 
   return (
-    <div className="container">
+    <div className="container margin-top-xl">
       <div className={styles["btn-container"]}>
         {user && (
           <Link href="/CreateDoc">
@@ -37,7 +37,7 @@ export default function Home({ posts }) {
           className={styles.search}
           placeholder="Search a doc"
         />
-        <h3 className={styles["post-title"]}>Documentations</h3>
+        {/* <h3 className={styles["post-title"]}>Documentations</h3> */}
         <div className="card-container">
           <PostFeed posts={posts} />
         </div>
