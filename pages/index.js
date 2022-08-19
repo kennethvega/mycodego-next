@@ -34,7 +34,7 @@ export default function Home() {
           placeholder="Search a doc"
         />
         <h3 className={styles["post-title"]}>Documentations</h3>
-        <div className={styles["card-container"]}>
+        <div className="card-container">
           <PostFeed />
         </div>
       </div>

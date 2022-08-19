@@ -11,7 +11,9 @@ const UserProfilePage = ({ posts, user }) => {
   return (
     <main className="container">
       <UserProfile userDetail={user} />
-      <PostFeed posts={posts} />
+      <div className="card-container">
+        <PostFeed posts={posts} />
+      </div>
       {console.log(posts)}
     </main>
   );
@@ -23,7 +25,6 @@ export async function getServerSideProps({ query }) {
   const { username } = query;
 
   const userDoc = await getUserDocWithUsername(username);
-
   // If no user, short circuit to 404 page
   if (!userDoc) {
     return {

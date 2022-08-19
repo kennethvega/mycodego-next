@@ -2,6 +2,9 @@ import React from "react";
 import styles from "./DocumentCard.module.scss";
 import Link from "next/link";
 const DocumentCard = ({ post, key, admin = false }) => {
+  // formating date
+  const d = new Date(post.createdAt);
+  const date = d.toLocaleDateString("en-US");
   return (
     <Link href={`/pages${post.userId}/${post.slug}`}>
       <div className={styles.container}>
@@ -11,7 +14,7 @@ const DocumentCard = ({ post, key, admin = false }) => {
           <span>
             <Link href={`/${post.username}`}>Author: Kenneth Vega</Link>
           </span>
-          <span>January 19 2022</span>
+          <span>{date.padStart(2, "0")}</span>
         </footer>
       </div>
     </Link>

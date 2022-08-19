@@ -111,3 +111,11 @@
     font-size: 400;
   }
 }
+.card-container {
+  margin-top: 2rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+}
