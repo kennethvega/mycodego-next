@@ -11,8 +11,12 @@ const Navbar = () => {
   return (
     <div className={styles["nav-container"]}>
       <div className={styles.container}>
-        <div className={styles.logo}>
-          <Link href="/">DevCreate</Link>
+        <div>
+          <Link href="/">
+            <div className={styles.logo}>
+              <a>MYCODEGO</a>
+            </div>
+          </Link>
         </div>
         {!user && (
           <div className={styles.list}>

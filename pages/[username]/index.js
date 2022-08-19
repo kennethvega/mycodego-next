@@ -18,6 +18,7 @@ const UserProfilePage = ({ posts, user }) => {
 };
 
 export default UserProfilePage;
+
 export async function getServerSideProps({ query }) {
   const { username } = query;
 
