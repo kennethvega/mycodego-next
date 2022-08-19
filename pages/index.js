@@ -1,13 +1,17 @@
 import styles from "../styles/home.module.scss";
-import { useState } from "react";
-import DocumentCard from "../components/DocumentCard";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Link from "next/link";
 import PostFeed from "../components/PostFeed";
-
-export default function Home() {
-  const [docs, setDocs] = useState(null);
-  const { user, authIsReady } = useAuthContext();
+import {
+  collectionGroup,
+  query,
+  where,
+  orderBy,
+  getDocs,
+} from "firebase/firestore";
+import { postToJSON, db } from "../lib/firebase-config";
+export default function Home({ posts }) {
+  const { user } = useAuthContext();
 
   return (
     <div className="container">
@@ -35,9 +39,25 @@ export default function Home() {
         />
         <h3 className={styles["post-title"]}>Documentations</h3>
         <div className="card-container">
-          <PostFeed />
+          <PostFeed posts={posts} />
         </div>
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const postQuery = query(
+    collectionGroup(db, "posts"),
+    where("published", "==", true),
+    orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocs(postQuery);
+  const posts = querySnapshot.docs.map(postToJSON);
+
+  return {
+    props: {
+      posts,
+    },
+  };
 }
