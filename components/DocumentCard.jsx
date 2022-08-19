@@ -8,9 +8,9 @@ const DocumentCard = ({ post, key, admin = false }) => {
         <h3>{post.title}</h3>
         <p>{post.summary}</p>
         <footer className={styles.footer}>
-          <Link href={`/${post.username}`}>
-            <span>Author: Kenneth Vega</span>
-          </Link>
+          <span>
+            <Link href={`/${post.username}`}>Author: Kenneth Vega</Link>
+          </span>
           <span>January 19 2022</span>
         </footer>
       </div>

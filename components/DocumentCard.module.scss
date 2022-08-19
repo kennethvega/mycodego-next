@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   width: 40rem;
   height: 25rem;
   padding: 2rem;
@@ -24,11 +25,20 @@
 }
 
 .footer {
+  position: absolute;
+  top: 65%;
   margin-top: 5rem;
   display: flex;
-  justify-content: space-between;
+  gap: 10rem;
+  align-items: center;
+
   span {
     font-size: 1.3rem;
     color: var(--text);
+    & a {
+      text-decoration: none;
+      color: var(--text);
+      border-bottom: 1px solid var(--text);
+    }
   }
 }
