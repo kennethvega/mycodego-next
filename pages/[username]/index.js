@@ -9,7 +9,7 @@ import {
 
 const UserProfilePage = ({ posts, user }) => {
   return (
-    <main>
+    <main className="container">
       <UserProfile userDetail={user} />
       <PostFeed posts={posts} />
       {console.log(posts)}
