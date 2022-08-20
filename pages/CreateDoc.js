@@ -2,7 +2,7 @@ import React from "react";
 
 const CreateDoc = () => {
   return (
-    <div className="container">
+    <div className="container margin-top-xl">
       <div className="form mx-width-large">
         <h2>Create a doc</h2>
         <label>
