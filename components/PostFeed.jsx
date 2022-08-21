@@ -4,7 +4,7 @@ import styles from "./PostFeed.module.scss";
 const PostFeed = ({ posts, admin }) => {
   return posts ? (
     posts.map((post) => (
-      <DocumentCard post={post} key={post.slug} admin={admin} />
+      <DocumentCard key={post.slug} post={post} admin={admin} />
     ))
   ) : (
     <p>No documents</p>
