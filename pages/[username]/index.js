@@ -3,7 +3,7 @@ import UserProfile from "../../components/UserProfile";
 import PostFeed from "../../components/PostFeed";
 import {
   getUserDocWithUsername,
-  getUserPost,
+  getUserPosts,
   postToJSON,
 } from "../../lib/firebase-config";
 
@@ -35,7 +35,7 @@ export async function getServerSideProps({ query }) {
   let posts = null;
   if (userDoc) {
     user = userDoc.data();
-    const postQuery = await getUserPost(username);
+    const postQuery = await getUserPosts(username);
     posts = postQuery.docs.map(postToJSON);
   }
 
