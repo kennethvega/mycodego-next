@@ -1,4 +1,6 @@
 import React from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const CreateDoc = () => {
   return (
@@ -25,6 +27,9 @@ const CreateDoc = () => {
         </label>
         <label>
           <span>Content:</span>
+          <div>
+            <ReactQuill />
+          </div>
         </label>
       </div>
     </div>
