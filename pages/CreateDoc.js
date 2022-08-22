@@ -1,21 +1,41 @@
-import React from "react";
-import ReactQuill from "react-quill";
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
-import EditorToolbar, { modules, formats } from "../components/EditorToolbar";
+import { QuillFormats, QuillModules } from "../helpers/quill";
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const CreateDoc = () => {
+  const [title, setTitle] = useState("");
+  const [summary, setSummary] = useState("");
+  const [content, setContent] = useState("");
+  // const handleBody = (e) => {
+  //   // console.log(e);
+  //   setBody(e);
+  //   formData.set('body', e);
+  //   if (typeof window !== 'undefined') {
+  //     localStorage.setItem('blog', JSON.stringify(e));
+  //   }
+  // };
+
   return (
     <div className="container margin-top-xl">
-      <div className="form mx-width-large">
+      <form className="form mx-width-large">
         <h2>Create a doc</h2>
         <label>
           <span>Title:</span>
-          <input type="email" required />
+          <input
+            type="text"
+            required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
         </label>
         <label>
           <span>Short description:</span>
           <textarea
-            type="email"
+            type="text"
             required
+            value={summary}
+            onChange={(e) => setSummary(e.target.value)}
             style={{
               height: "8rem",
               width: "100%",
@@ -28,18 +48,18 @@ const CreateDoc = () => {
         <label>
           <span>Content:</span>
           <div className="text-editor">
-            <EditorToolbar />
             <ReactQuill
-              theme="snow"
-              // value={state.value}
-              // onChange={handleChange}
               placeholder={"Write something awesome..."}
-              modules={modules}
-              formats={formats}
+              modules={QuillModules}
+              formats={QuillFormats}
+              required
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
             />
           </div>
         </label>
-      </div>
+        <button className="btn">Submit</button>
+      </form>
     </div>
   );
 };
