@@ -1,21 +1,15 @@
 import React, { useState } from "react";
+// import TextEditor from "../components/TextEditor";
 import dynamic from "next/dynamic";
-// import "react-quill/dist/quill.snow.css";
-// import { QuillFormats, QuillModules } from "../helpers/quill";
-import Editor from "../components/Editor";
-// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const TextEditor = dynamic(() => import("../components/TextEditor"), {
+  ssr: false,
+});
+
 const CreateDoc = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
-  // const handleBody = (e) => {
-  //   // console.log(e);
-  //   setBody(e);
-  //   formData.set('body', e);
-  //   if (typeof window !== 'undefined') {
-  //     localStorage.setItem('blog', JSON.stringify(e));
-  //   }
-  // };
+
   const addDesc = (value) => {
     setContent(value);
   };
@@ -51,7 +45,9 @@ const CreateDoc = () => {
         </label>
         <label>
           <span>Content:</span>
-          <div className="text-editor">{/* <Editor /> */}</div>
+          <div className="text-editor">
+            <TextEditor />
+          </div>
         </label>
         <button className="btn">Submit</button>
       </form>
