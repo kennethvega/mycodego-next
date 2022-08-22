@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import "react-quill/dist/quill.snow.css";
-import { QuillFormats, QuillModules } from "../helpers/quill";
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+// import "react-quill/dist/quill.snow.css";
+// import { QuillFormats, QuillModules } from "../helpers/quill";
+import Editor from "../components/Editor";
+// const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 const CreateDoc = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
@@ -15,6 +16,9 @@ const CreateDoc = () => {
   //     localStorage.setItem('blog', JSON.stringify(e));
   //   }
   // };
+  const addDesc = (value) => {
+    setContent(value);
+  };
 
   return (
     <div className="container margin-top-xl">
@@ -47,16 +51,7 @@ const CreateDoc = () => {
         </label>
         <label>
           <span>Content:</span>
-          <div className="text-editor">
-            <ReactQuill
-              placeholder={"Write something awesome..."}
-              modules={QuillModules}
-              formats={QuillFormats}
-              required
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </div>
+          <div className="text-editor">{/* <Editor /> */}</div>
         </label>
         <button className="btn">Submit</button>
       </form>

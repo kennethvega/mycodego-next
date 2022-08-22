@@ -1,11 +1,10 @@
 export const QuillModules = {
   toolbar: [
-    [{ header: "1" }, { header: "2" }, { header: [3, 4, 5, 6] }],
-    [{ size: [] }],
-    ["bold", "italic", "underline"],
+    [{ header: [1, 2, false] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
     [{ list: "ordered" }, { list: "bullet" }],
     ["link", "image"],
-
+    ["clean"],
     ["code-block"],
   ],
 };
