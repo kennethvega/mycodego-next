@@ -70,3 +70,14 @@ html {
     }
   }
 }
+
+// Quill.js styling
+.ql-header.ql-picker {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+.ql-editor {
+  height: 40rem !important;
+}
