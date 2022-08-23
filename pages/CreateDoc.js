@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import TextEditor from "../components/TextEditor";
 import dynamic from "next/dynamic";
-// const TextEditor = dynamic(() => import("../components/TextEditor"), {
-//   ssr: false,
-// });
+
 
 
 const CreateDoc = () => {
