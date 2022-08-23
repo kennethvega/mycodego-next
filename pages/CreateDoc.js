@@ -7,6 +7,8 @@ const CreateDoc = () => {
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
 
+  console.log("Title:", title, "Summary:", summary, "Content:", content);
+
   return (
     <div className="container margin-top-xl">
       <div className="form mx-width-large">
@@ -40,7 +42,6 @@ const CreateDoc = () => {
           <span>Content:</span>
           <div>
             <TextEditor setContent={setContent} />
-            <p>{content}</p>
           </div>
         </label>
         <button type="button" className="btn">

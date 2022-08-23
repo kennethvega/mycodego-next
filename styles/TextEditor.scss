@@ -4,6 +4,7 @@
 }
 .menu-bar {
   padding-bottom: 5px;
+  padding-top: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,10 +25,18 @@ button.is-active {
   padding: 2px 3px;
   border-radius: 2px;
 }
+button {
+  svg {
+    font-size: 1.5rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+}
 
 .ProseMirror {
   min-height: 40rem;
   border-top: 1px solid var(--line-color);
+  padding: 1.5rem;
 
   > * + * {
     margin-top: 0.75em;
@@ -73,6 +82,7 @@ button.is-active {
   }
 
   blockquote {
+    display: none;
   }
 
   hr {
