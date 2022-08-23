@@ -1,21 +1,15 @@
 import React, { useState } from "react";
-import TextEditor from "../components/TextEditor";
+
 import dynamic from "next/dynamic";
-
-
-
+import TextEditor from "../components/TextEditor";
 const CreateDoc = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
 
-  const addDesc = (value) => {
-    setContent(value);
-  };
-
   return (
     <div className="container margin-top-xl">
-      <form className="form mx-width-large">
+      <div className="form mx-width-large">
         <h2>Create a doc</h2>
         <label>
           <span>Title:</span>
@@ -44,12 +38,13 @@ const CreateDoc = () => {
         </label>
         <label>
           <span>Content:</span>
-          <div className="text-editor">
-            <TextEditor />
+          <div>
+            <TextEditor setContent={setContent} />
+            <p>{content}</p>
           </div>
         </label>
         <button className="btn">Submit</button>
-      </form>
+      </div>
     </div>
   );
 };

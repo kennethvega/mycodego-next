@@ -7,11 +7,9 @@ import Underline from "@tiptap/extension-underline";
 // icons
 import {
   FaBold,
-  FaHeading,
   FaItalic,
   FaListOl,
   FaListUl,
-  FaQuoteLeft,
   FaStrikethrough,
   FaUnderline,
   FaRedo,
@@ -27,6 +25,10 @@ const MenuBar = ({ editor }) => {
   return (
     <div className="menu-bar">
       <div>
+        <button
+          onClick={() => editor.chain().focus().toggleBlockquote()}
+          className={editor.isActive("blockquote") ? "is-active" : ""}
+        ></button>
         <button
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "is-active" : ""}
@@ -51,7 +53,6 @@ const MenuBar = ({ editor }) => {
         >
           <FaStrikethrough />
         </button>
-
         <button
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 1 }).run()
@@ -100,12 +101,6 @@ const MenuBar = ({ editor }) => {
         >
           <BiCodeCurly />
         </button>
-        <button
-          onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={editor.isActive("blockquote") ? "is-active" : ""}
-        >
-          <FaQuoteLeft />
-        </button>
       </div>
       <div>
         <button onClick={() => editor.chain().focus().undo().run()}>
@@ -119,13 +114,16 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const TextEditor = () => {
+const TextEditor = ({ setContent }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
-    autofocus: true,
-    editable: true,
     content: `
     `,
+
+    onUpdate: ({ editor }) => {
+      const html = editor.getHTML();
+      setContent(html);
+    },
   });
 
   return (
