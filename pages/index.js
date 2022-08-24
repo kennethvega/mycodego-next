@@ -14,6 +14,7 @@ import { postToJSON, db } from "../lib/firebase-config";
 import { useEffect, useState } from "react";
 export default function Home(props) {
   const [documents, setDocuments] = useState(props.posts);
+
   const { user } = useAuthContext();
 
   return (
