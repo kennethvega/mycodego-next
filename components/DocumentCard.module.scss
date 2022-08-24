@@ -40,7 +40,11 @@
     & a {
       text-decoration: none;
       color: var(--text);
-      border-bottom: 1px solid var(--text);
+
+      & span {
+        color: var(--text);
+        border-bottom: 1px solid var(--text);
+      }
     }
   }
 }

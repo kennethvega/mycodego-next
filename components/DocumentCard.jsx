@@ -16,7 +16,9 @@ const DocumentCard = ({ post, admin = false }) => {
         <footer className={styles.footer}>
           <span>
             <Link href={`/${post.username}`}>
-              <a>Author: {name}</a>
+              <a>
+                Author: <span>@{name.split(" ")}</span>
+              </a>
             </Link>
           </span>
           <span>{date.padStart(2, "0")}</span>
