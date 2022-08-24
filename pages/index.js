@@ -13,24 +13,8 @@ import {
 import { postToJSON, db } from "../lib/firebase-config";
 import { useEffect, useState } from "react";
 export default function Home(props) {
-  const [documents, setDocuments] = useState(null);
+  const [documents, setDocuments] = useState(props.posts);
   const { user } = useAuthContext();
-
-  // fetch all of the documents
-  useEffect(() => {
-    const postQuery = query(
-      collectionGroup(db, "posts"),
-      where("published", "==", true),
-      orderBy("createdAt", "desc")
-    );
-    const unsub = onSnapshot(postQuery, (snapshot) => {
-      let results = [];
-      snapshot.docs.forEach((doc) => {
-        results.push({ ...doc.data(), id: doc.id });
-      });
-    });
-    // setDocuments(results.map(postToJSON)); fix this!
-  }, [documents]);
 
   return (
     <div className="container margin-top-xl">
@@ -56,7 +40,7 @@ export default function Home(props) {
           className={styles.search}
           placeholder="Search a doc"
         />
-        {/* <h3 className={styles["post-title"]}>Documentations</h3> */}
+
         <div className="card-container">
           <PostFeed posts={documents} />
         </div>
@@ -65,18 +49,18 @@ export default function Home(props) {
   );
 }
 
-// export async function getServerSideProps() {
-//   const postQuery = query(
-//     collectionGroup(db, "posts"),
-//     where("published", "==", true),
-//     orderBy("createdAt", "desc")
-//   );
-//   const querySnapshot = await getDocs(postQuery);
-//   const posts = querySnapshot.docs.map(postToJSON);
+export async function getServerSideProps() {
+  const postQuery = query(
+    collectionGroup(db, "posts"),
+    where("published", "==", true),
+    orderBy("createdAt", "desc")
+  );
+  const querySnapshot = await getDocs(postQuery);
+  const posts = querySnapshot.docs.map(postToJSON);
 
-//   return {
-//     props: {
-//       posts,
-//     },
-//   };
-// }
+  return {
+    props: {
+      posts,
+    },
+  };
+}
