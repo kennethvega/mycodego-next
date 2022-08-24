@@ -3,20 +3,12 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { useRouter } from "next/router";
 import styles from "./UserProfile.module.scss";
 import Image from "next/image";
-import DocumentCard from "../components/DocumentCard";
+import CapitalizeStringName from "../helpers/capitalizeStringName";
 const UserProfile = ({ userDetail }) => {
   const { user } = useAuthContext();
   const router = useRouter();
-  const [name, setName] = useState(null);
-  useEffect(() => {
-    const username = userDetail?.username.split(" ");
-    const displayName = username
-      .map((dn) => {
-        return dn[0].toUpperCase() + dn.substring(1);
-      })
-      .join(" ");
-    setName(displayName);
-  }, [userDetail]);
+
+  const name = CapitalizeStringName(userDetail);
 
   useEffect(() => {
     if (!user) {
