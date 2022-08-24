@@ -8,6 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
   & button {
     font-size: 1.8rem;
     margin: 0.7rem;
@@ -35,8 +36,10 @@ button {
 
 .ProseMirror {
   min-height: 40rem;
+  max-height: 40rem;
   border-top: 1px solid var(--line-color);
   padding: 1.5rem;
+  overflow: scroll;
 
   > * + * {
     margin-top: 0.75em;

@@ -24,7 +24,7 @@ const MenuBar = ({ editor }) => {
 
   return (
     <div className="menu-bar">
-      <div className="menu-bar-tools">
+      <div>
         <button
           onClick={() => editor.chain().focus().toggleBlockquote()}
           className="blockquote"
@@ -102,7 +102,7 @@ const MenuBar = ({ editor }) => {
           <BiCodeCurly />
         </button>
       </div>
-      <div className="redo-undo">
+      <div>
         <button onClick={() => editor.chain().focus().undo().run()}>
           <FaUndo />
         </button>
