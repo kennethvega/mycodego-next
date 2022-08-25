@@ -10,7 +10,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { postToJSON, db } from "../lib/firebase-config";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 export default function Home(props) {
   const [documents, setDocuments] = useState(props.posts);
 

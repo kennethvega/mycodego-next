@@ -1,10 +1,4 @@
-import {
-  collectionGroup,
-  getDocs,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { collectionGroup, getDocs, query, where } from "firebase/firestore";
 import React from "react";
 import {
   db,

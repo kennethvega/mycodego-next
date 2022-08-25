@@ -3,16 +3,56 @@ import { RiEarthFill } from "react-icons/ri";
 import { AiFillLock } from "react-icons/ai";
 import { BsCircle, BsFillCheckCircleFill } from "react-icons/bs";
 import TextEditor from "../components/TextEditor";
+
 // firebase
-import { collection, addDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { db } from "../lib/firebase-config";
 import { useAuthContext } from "../hooks/useAuthContext";
+import Loader from "../components/Loader";
+import { useRouter } from "next/router";
 const CreateDoc = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [publicPost, setPublicPost] = useState(true);
   const { user } = useAuthContext();
-  console.log(user.uid);
+  const router = useRouter();
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    // firebase query
+    // const docRef = doc(db, "users", `${user.uid}`, "posts");
+    const colRef = collection(db, "users", `${user.uid}`, "posts");
+    await addDoc(colRef, {
+      title: title,
+      summary: summary,
+      content: content,
+      username: user.displayName,
+      slug: "",
+      published: publicPost,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+    })
+      .then(async (docRef) => {
+        // console.log(docRef.id);
+        await updateDoc(docRef, {
+          slug: docRef.id,
+        });
+        router.push("/");
+      })
+
+      .catch((error) => {
+        console.log(error);
+      });
+    setIsLoading(false);
+  };
+
   // const handleSubmit = async () => {
   //   const q = query(
   //     collection(db, "users"),
@@ -78,9 +118,20 @@ const CreateDoc = () => {
           </div>
         </div>
 
-        <button type="button" className="btn margin-top-sm">
-          Submit
-        </button>
+        {isLoading && (
+          <button className="btn margin-top-sm center-items" disabled>
+            Loading <Loader />
+          </button>
+        )}
+        {!isLoading && (
+          <button
+            type="button"
+            className="btn margin-top-sm"
+            onClick={handleSubmit}
+          >
+            Submit
+          </button>
+        )}
       </div>
     </div>
   );
