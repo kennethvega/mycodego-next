@@ -84,13 +84,12 @@ button {
     height: auto;
   }
 
-  blockquote {
-    display: none;
-  }
-
   hr {
     border: none;
     border-top: 2px solid var(--line-color);
     margin: 2rem 0;
   }
+}
+.blockquote {
+  display: none;
 }

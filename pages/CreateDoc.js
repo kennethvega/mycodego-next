@@ -1,13 +1,24 @@
 import React, { useState } from "react";
-
-import dynamic from "next/dynamic";
+import { RiEarthFill } from "react-icons/ri";
+import { AiFillLock } from "react-icons/ai";
+import { BsCircle, BsFillCheckCircleFill } from "react-icons/bs";
 import TextEditor from "../components/TextEditor";
 const CreateDoc = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
+  const [publicPost, setPublicPost] = useState(true);
 
-  console.log("Title:", title, "Summary:", summary, "Content:", content);
+  console.log(
+    "Title:",
+    title,
+    "Summary:",
+    summary,
+    "Content:",
+    content,
+    "Published",
+    publicPost
+  );
 
   return (
     <div className="container margin-top-xl">
@@ -44,7 +55,21 @@ const CreateDoc = () => {
             <TextEditor setContent={setContent} />
           </div>
         </label>
-        <button type="button" className="btn">
+
+        <div className="public-toggle">
+          <div onClick={() => setPublicPost(true)} className="toggle-svg">
+            {publicPost ? <BsFillCheckCircleFill /> : <BsCircle />}
+            <RiEarthFill /> Public
+          </div>
+          <div onClick={() => setPublicPost(false)} className="toggle-svg">
+            <div className="toggle-item">
+              {publicPost ? <BsCircle /> : <BsFillCheckCircleFill />}
+              <AiFillLock /> Only me
+            </div>
+          </div>
+        </div>
+
+        <button type="button" className="btn margin-top-sm">
           Submit
         </button>
       </div>

@@ -70,3 +70,25 @@ html {
     }
   }
 }
+
+.public-toggle-container {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 2rem;
+}
+
+.public-toggle {
+  display: flex;
+  gap: 5rem;
+}
+.toggle-svg {
+  display: flex;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+// .toggle-item {
+//   display: flex;
+//   flex-direction: row;
+// }
