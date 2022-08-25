@@ -8,7 +8,6 @@ import {
   where,
   orderBy,
   getDocs,
-  onSnapshot,
 } from "firebase/firestore";
 import { postToJSON, db } from "../lib/firebase-config";
 import { useEffect, useState } from "react";

@@ -30,30 +30,35 @@ const MenuBar = ({ editor }) => {
           className="blockquote"
         ></button>
         <button
+          title="Bold"
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "is-active" : ""}
         >
           <FaBold />
         </button>
         <button
+          title="Italic"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={editor.isActive("italic") ? "is-active" : ""}
         >
           <FaItalic />
         </button>
         <button
+          title="Underline"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           className={editor.isActive("underline") ? "is-active" : ""}
         >
           <FaUnderline />
         </button>
         <button
+          title="Strike through"
           onClick={() => editor.chain().focus().toggleStrike().run()}
           className={editor.isActive("strike") ? "is-active" : ""}
         >
           <FaStrikethrough />
         </button>
         <button
+          title="Heading 1"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 1 }).run()
           }
@@ -64,6 +69,7 @@ const MenuBar = ({ editor }) => {
           h1
         </button>
         <button
+          title="Heading 2"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
           }
@@ -74,6 +80,7 @@ const MenuBar = ({ editor }) => {
           h2
         </button>
         <button
+          title="Heading 3"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
           }
@@ -84,18 +91,21 @@ const MenuBar = ({ editor }) => {
           h3
         </button>
         <button
+          title="Bullet list"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={editor.isActive("bulletList") ? "is-active" : ""}
         >
           <FaListUl />
         </button>
         <button
+          title="Ordered list"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={editor.isActive("orderedList") ? "is-active" : ""}
         >
           <FaListOl />
         </button>
         <button
+          title="Code block"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           className={editor.isActive("codeBlock") ? "is-active" : ""}
         >
@@ -103,10 +113,16 @@ const MenuBar = ({ editor }) => {
         </button>
       </div>
       <div>
-        <button onClick={() => editor.chain().focus().undo().run()}>
+        <button
+          title="Undo"
+          onClick={() => editor.chain().focus().undo().run()}
+        >
           <FaUndo />
         </button>
-        <button onClick={() => editor.chain().focus().redo().run()}>
+        <button
+          title="Redo"
+          onClick={() => editor.chain().focus().redo().run()}
+        >
           <FaRedo />
         </button>
       </div>
