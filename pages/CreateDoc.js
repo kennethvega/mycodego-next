@@ -3,22 +3,31 @@ import { RiEarthFill } from "react-icons/ri";
 import { AiFillLock } from "react-icons/ai";
 import { BsCircle, BsFillCheckCircleFill } from "react-icons/bs";
 import TextEditor from "../components/TextEditor";
+// firebase
+import { collection, addDoc } from "firebase/firestore";
+import { useAuthContext } from "../hooks/useAuthContext";
 const CreateDoc = () => {
   const [title, setTitle] = useState("");
   const [summary, setSummary] = useState("");
   const [content, setContent] = useState("");
   const [publicPost, setPublicPost] = useState(true);
-
-  console.log(
-    "Title:",
-    title,
-    "Summary:",
-    summary,
-    "Content:",
-    content,
-    "Published",
-    publicPost
-  );
+  const { user } = useAuthContext();
+  console.log(user.uid);
+  // const handleSubmit = async () => {
+  //   const q = query(
+  //     collection(db, "users"),
+  //     where("username", "==", username.toLowerCase()),
+  //     limit(1)
+  //   );
+  //   const snapShot = await getDocs(q);
+  //   const userData = snapShot.docs[0];
+  //   //
+  //   const postQuery = query(
+  //     collection(db, `users/${userData.id}/posts`),
+  //     where("slug", "==", slug),
+  //     limit(1)
+  //   );
+  // };
 
   return (
     <div className="container margin-top-xl">

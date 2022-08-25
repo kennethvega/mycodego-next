@@ -28,17 +28,19 @@ export const useSignup = () => {
               displayName: userName,
             });
             // add to database users
-            await addDoc(collection(db, "users"), {
+            await setDoc(doc(db, "users", `${user.uid}`), {
               userId: user.uid,
               username: userName.toLowerCase(),
               emailAddress: email.toLowerCase(),
               dateCreated: Date.now(),
+              bio: "",
+              photoURL: "",
             });
-            // add to database username -- check on this
-            const username = userName.toLowerCase();
-            await setDoc(doc(db, "username", username), {
-              uid: user.uid,
-            });
+            // // add to database username -- check on this
+            // const username = userName.toLowerCase();
+            // await setDoc(doc(db, "username", username), {
+            //   uid: user.uid,
+            // });
 
             dispatch({ type: "LOGIN", payload: user });
             router.push("/");
