@@ -28,8 +28,10 @@ const MenuBar = ({ editor }) => {
         <button
           onClick={() => editor.chain().focus().toggleBlockquote()}
           className="blockquote"
+          type="button"
         ></button>
         <button
+          type="button"
           title="Bold"
           onClick={() => editor.chain().focus().toggleBold().run()}
           className={editor.isActive("bold") ? "is-active" : ""}
@@ -37,6 +39,7 @@ const MenuBar = ({ editor }) => {
           <FaBold />
         </button>
         <button
+          type="button"
           title="Italic"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={editor.isActive("italic") ? "is-active" : ""}
@@ -44,6 +47,7 @@ const MenuBar = ({ editor }) => {
           <FaItalic />
         </button>
         <button
+          type="button"
           title="Underline"
           onClick={() => editor.chain().focus().toggleUnderline().run()}
           className={editor.isActive("underline") ? "is-active" : ""}
@@ -51,6 +55,7 @@ const MenuBar = ({ editor }) => {
           <FaUnderline />
         </button>
         <button
+          type="button"
           title="Strike through"
           onClick={() => editor.chain().focus().toggleStrike().run()}
           className={editor.isActive("strike") ? "is-active" : ""}
@@ -58,6 +63,7 @@ const MenuBar = ({ editor }) => {
           <FaStrikethrough />
         </button>
         <button
+          type="button"
           title="Heading 1"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 1 }).run()
@@ -69,6 +75,7 @@ const MenuBar = ({ editor }) => {
           h1
         </button>
         <button
+          type="button"
           title="Heading 2"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 2 }).run()
@@ -80,6 +87,7 @@ const MenuBar = ({ editor }) => {
           h2
         </button>
         <button
+          type="button"
           title="Heading 3"
           onClick={() =>
             editor.chain().focus().toggleHeading({ level: 3 }).run()
@@ -91,6 +99,7 @@ const MenuBar = ({ editor }) => {
           h3
         </button>
         <button
+          type="button"
           title="Bullet list"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={editor.isActive("bulletList") ? "is-active" : ""}
@@ -98,6 +107,7 @@ const MenuBar = ({ editor }) => {
           <FaListUl />
         </button>
         <button
+          type="button"
           title="Ordered list"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={editor.isActive("orderedList") ? "is-active" : ""}
@@ -105,6 +115,7 @@ const MenuBar = ({ editor }) => {
           <FaListOl />
         </button>
         <button
+          type="button"
           title="Code block"
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
           className={editor.isActive("codeBlock") ? "is-active" : ""}
@@ -114,12 +125,14 @@ const MenuBar = ({ editor }) => {
       </div>
       <div>
         <button
+          type="button"
           title="Undo"
           onClick={() => editor.chain().focus().undo().run()}
         >
           <FaUndo />
         </button>
         <button
+          type="button"
           title="Redo"
           onClick={() => editor.chain().focus().redo().run()}
         >
@@ -135,7 +148,6 @@ const TextEditor = ({ setContent }) => {
     extensions: [StarterKit, Underline],
     content: `
     `,
-
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       setContent(html);

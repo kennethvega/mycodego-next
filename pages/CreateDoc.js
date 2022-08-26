@@ -24,7 +24,8 @@ const CreateDoc = () => {
   const { user } = useAuthContext();
   const router = useRouter();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
     // firebase query
     // const docRef = doc(db, "users", `${user.uid}`, "posts");
@@ -53,25 +54,9 @@ const CreateDoc = () => {
     setIsLoading(false);
   };
 
-  // const handleSubmit = async () => {
-  //   const q = query(
-  //     collection(db, "users"),
-  //     where("username", "==", username.toLowerCase()),
-  //     limit(1)
-  //   );
-  //   const snapShot = await getDocs(q);
-  //   const userData = snapShot.docs[0];
-  //   //
-  //   const postQuery = query(
-  //     collection(db, `users/${userData.id}/posts`),
-  //     where("slug", "==", slug),
-  //     limit(1)
-  //   );
-  // };
-
   return (
     <div className="container margin-top-xl">
-      <div className="form mx-width-large">
+      <form className="form mx-width-large">
         <h2>Create a doc</h2>
         <label>
           <span>Title:</span>
@@ -101,18 +86,26 @@ const CreateDoc = () => {
         <label>
           <span>Content:</span>
           <div>
-            <TextEditor setContent={setContent} />
+            <TextEditor setContent={setContent} required />
           </div>
         </label>
 
         <div className="public-toggle">
           <div onClick={() => setPublicPost(true)} className="toggle-svg">
-            {publicPost ? <BsFillCheckCircleFill /> : <BsCircle />}
+            {publicPost ? (
+              <BsFillCheckCircleFill className="circle-check" />
+            ) : (
+              <BsCircle />
+            )}
             <RiEarthFill /> Public
           </div>
           <div onClick={() => setPublicPost(false)} className="toggle-svg">
             <div className="toggle-item">
-              {publicPost ? <BsCircle /> : <BsFillCheckCircleFill />}
+              {publicPost ? (
+                <BsCircle />
+              ) : (
+                <BsFillCheckCircleFill className="circle-check" />
+              )}
               <AiFillLock /> Only me
             </div>
           </div>
@@ -132,7 +125,7 @@ const CreateDoc = () => {
             Submit
           </button>
         )}
-      </div>
+      </form>
     </div>
   );
 };
