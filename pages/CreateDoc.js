@@ -56,13 +56,13 @@ const CreateDoc = () => {
 
   return (
     <div className="container margin-top-xl">
-      <form className="form mx-width-large">
+      <form className="form mx-width-large" onSubmit={handleSubmit}>
         <h2>Create a doc</h2>
         <label>
           <span>Title:</span>
           <input
             type="text"
-            required
+            required={true}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -86,7 +86,7 @@ const CreateDoc = () => {
         <label>
           <span>Content:</span>
           <div>
-            <TextEditor setContent={setContent} required />
+            <TextEditor setContent={setContent}  />
           </div>
         </label>
 
@@ -116,15 +116,7 @@ const CreateDoc = () => {
             Loading <Loader />
           </button>
         )}
-        {!isLoading && (
-          <button
-            type="button"
-            className="btn margin-top-sm"
-            onClick={handleSubmit}
-          >
-            Submit
-          </button>
-        )}
+        {!isLoading && <button className="btn margin-top-sm">Submit</button>}
       </form>
     </div>
   );

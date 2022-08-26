@@ -146,6 +146,7 @@ const MenuBar = ({ editor }) => {
 const TextEditor = ({ setContent }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
+
     content: `
     `,
     onUpdate: ({ editor }) => {

@@ -36,11 +36,7 @@ export const useSignup = () => {
               bio: "",
               photoURL: "",
             });
-            // // add to database username -- check on this
-            // const username = userName.toLowerCase();
-            // await setDoc(doc(db, "username", username), {
-            //   uid: user.uid,
-            // });
+       
 
             dispatch({ type: "LOGIN", payload: user });
             router.push("/");
