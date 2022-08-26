@@ -2,7 +2,8 @@
   position: relative;
 }
 .profile-container {
-  padding: 1rem;
+  position: relative;
+
   border-radius: 50%;
   background-color: var(--gray-bg);
   cursor: pointer;
@@ -11,10 +12,20 @@
     background-color: var(--hover-gray-bg);
   }
 }
-.profile {
+.down-circle-svg {
+  position: absolute;
+  top: 55%;
+  padding: 1px;
+  right: -10%;
   width: 2rem;
   height: 2rem;
-  color: var(--text);
+  fill: var(--text);
+  background-color: var(--background-color);
+  border-radius: 50%;
+  z-index: 999;
+}
+.profile {
+  border-radius: 50%;
 }
 
 .dropdown-container {
