@@ -48,3 +48,10 @@ const UserProfile = ({ userDetail }) => {
 };
 
 export default UserProfile;
+
+// to dos
+// 1. learn firebase storage for image upload
+// 2. and reference it to users collection firestore
+// 3. create a modal form
+// 4. fetch user info for initial state
+// 5. update user info
