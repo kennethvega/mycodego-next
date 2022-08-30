@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 import styles from "./UserProfile.module.scss";
 import Image from "next/image";
 import CapitalizeStringName from "../helpers/capitalizeStringName";
+import Modal from "./Modal";
 const UserProfile = ({ userDetail }) => {
   const { user } = useAuthContext();
   const router = useRouter();
+  const [openModal, setOpenModal] = useState(false);
 
   const name = CapitalizeStringName(userDetail);
 
@@ -33,7 +35,12 @@ const UserProfile = ({ userDetail }) => {
           <div className={styles["top-container"]}>
             <h2 className={styles.name}>{name}</h2>
 
-            <button className="btn btn-sm">Edit profile</button>
+            <button className="btn btn-sm" onClick={() => setOpenModal(true)}>
+              Edit profile
+            </button>
+            <Modal openModal={openModal} onClose={() => setOpenModal(false)}>
+              Modal opened
+            </Modal>
           </div>
           <p>{userDetail?.bio}</p>
           <p>10 documents</p>
