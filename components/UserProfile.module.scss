@@ -9,6 +9,13 @@
   border-radius: 50%;
   overflow: hidden;
 }
+.picture {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  cursor: pointer;
+}
 
 .info {
   display: flex;
@@ -35,6 +42,10 @@
   border-top: 1px solid var(--line-color);
   margin-top: 2rem;
   composes: documents-container from "./../styles/home.module.scss";
+}
+.modal-title {
+  font-size: 2.5rem;
+  text-align: center;
 }
 
 .post-title {

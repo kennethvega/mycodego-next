@@ -14,7 +14,10 @@ const Modal = ({ openModal, onClose, children }) => {
   const modalContent = openModal ? (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <p onClick={handleClose}>x</p>
+        <p className={styles.close} onClick={handleClose}>
+          x
+        </p>
+        <div className={styles.body}>{children}</div>
       </div>
     </div>
   ) : null;

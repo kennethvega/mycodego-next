@@ -25,7 +25,7 @@ const UserProfile = ({ userDetail }) => {
       <div className={styles["profile-info"]}>
         <div className={styles["profile-image"]}>
           <Image
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+            src="/blank-profile.png"
             width={150}
             height={150}
             alt="user-profile"
@@ -39,7 +39,43 @@ const UserProfile = ({ userDetail }) => {
               Edit profile
             </button>
             <Modal openModal={openModal} onClose={() => setOpenModal(false)}>
-              Modal opened
+              <h3 className={styles["modal-title"]}>Update Profile</h3>
+              <form className="form">
+                <label>
+                  <span>Username:</span>
+                  <input
+                    type="text"
+
+                    // onChange={(e) => setEmail(e.target.value)}
+                    // value={email}
+                  />
+                </label>
+
+                <label>
+                  <span>Full name:</span>
+                  <input
+                    type="text"
+
+                    // onChange={(e) => setEmail(e.target.value)}
+                    // value={email}
+                  />
+                </label>
+                <label>
+                  <span>Bio:</span>
+                  <input
+                    type="text"
+
+                    // onChange={(e) => setEmail(e.target.value)}
+                    // value={email}
+                  />
+                </label>
+                <div className={styles.picture}>
+                  <p>Upload profile picture</p>
+                </div>
+                <div className="center-items margin-top-sm">
+                  <button className="btn">Update profile</button>
+                </div>
+              </form>
             </Modal>
           </div>
           <p>{userDetail?.bio}</p>
