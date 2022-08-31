@@ -14,7 +14,6 @@ const UserProfilePage = ({ posts, user }) => {
       <div className="card-container">
         <PostFeed posts={posts} />
       </div>
-      {console.log(posts)}
     </main>
   );
 };
