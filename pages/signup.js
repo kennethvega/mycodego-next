@@ -52,7 +52,7 @@ const Signup = () => {
           <input
             type="text"
             required
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => setUserName(e.target.value.trim())}
             value={userName}
           />
         </label>

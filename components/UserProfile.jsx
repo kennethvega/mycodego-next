@@ -69,7 +69,7 @@ const UserProfile = ({ userDetail }) => {
                     // value={email}
                   />
                 </label>
-                <div className={styles.picture}>
+                <label className={styles.picture} htmlFor="upload">
                   <Image
                     src="/blank-profile.png"
                     width={150}
@@ -78,7 +78,12 @@ const UserProfile = ({ userDetail }) => {
                     className={styles.image}
                   />
                   <p>Upload a photo</p>
-                </div>
+                  <input
+                    id="upload"
+                    type="file"
+                    className={styles["image-input-file"]}
+                  />
+                </label>
                 <div className="center-items margin-top-sm">
                   <button className="btn">Update profile</button>
                 </div>

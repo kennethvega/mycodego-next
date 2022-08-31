@@ -18,6 +18,13 @@
 }
 .image {
   border-radius: 50%;
+  transition: all 0.3s;
+  &:hover {
+    filter: invert(10%);
+  }
+}
+.image-input-file {
+  display: none;
 }
 
 .info {
