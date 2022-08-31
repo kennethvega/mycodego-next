@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./DocumentCard.module.scss";
 import Link from "next/link";
-import CapitalizeStringName from "../helpers/capitalizeStringName";
+
 const DocumentCard = ({ post, admin = false }) => {
   // formating date
   const d = new Date(post.createdAt);
   const date = d.toLocaleDateString("en-US");
   // format name
-  const name = CapitalizeStringName(post);
+
   return (
     <Link href={`/${post.username}/${post.slug}`}>
       <div className={styles.container}>
@@ -17,7 +17,7 @@ const DocumentCard = ({ post, admin = false }) => {
           <span>
             <Link href={`/${post.username}`}>
               <a>
-                Author: <span>@{name.split(" ")}</span>
+                Author: <span>@{post.username}</span>
               </a>
             </Link>
           </span>
