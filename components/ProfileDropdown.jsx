@@ -21,17 +21,18 @@ const ProfileDropdown = () => {
         <AiFillDownCircle className={styles["down-circle-svg"]} />
         {user?.photoUrl ? (
           <Image
-            src={user?.photoUrl}
+            // replace this with photoUrl
+            src="/blank-profile.png"
             width={30}
             height={30}
             alt="profile avatar"
           />
         ) : (
           <Image
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"
+            src="/blank-profile.png"
             className={styles.profile}
-            width="40"
-            height="40"
+            width={40}
+            height={40}
             alt="user-profile"
           />
           // <BsFillPersonFill className={styles.profile} />

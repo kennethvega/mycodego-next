@@ -70,7 +70,14 @@ const UserProfile = ({ userDetail }) => {
                   />
                 </label>
                 <div className={styles.picture}>
-                  <p>Upload profile picture</p>
+                  <Image
+                    src="/blank-profile.png"
+                    width={150}
+                    height={150}
+                    alt="user-profile"
+                    className={styles.image}
+                  />
+                  <p>Upload a photo</p>
                 </div>
                 <div className="center-items margin-top-sm">
                   <button className="btn">Update profile</button>

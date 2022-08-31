@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
 }
 .modal {
   position: relative;
@@ -16,6 +17,7 @@
   width: 40rem;
   margin-top: 10rem;
   border-radius: 0.5rem;
+  z-index: 1000;
 }
 .close {
   position: absolute;
