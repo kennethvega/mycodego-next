@@ -29,14 +29,11 @@ export const useSignup = () => {
             });
             // add to database users
             await setDoc(doc(db, "users", `${user.uid}`), {
-              userId: user.uid,
+              id: user.uid,
               username: userName.toLowerCase(),
               emailAddress: email.toLowerCase(),
               dateCreated: Date.now(),
-              bio: "",
-              photoURL: "",
             });
-       
 
             dispatch({ type: "LOGIN", payload: user });
             router.push("/");

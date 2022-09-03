@@ -1,42 +1,93 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useRouter } from "next/router";
 import styles from "./UserProfile.module.scss";
 import Image from "next/image";
 
 import Modal from "./Modal";
-import { upload } from "../lib/firebase-config";
+import { db, storage, upload } from "../lib/firebase-config";
 import Loader from "./Loader";
+import { updateProfile } from "firebase/auth";
+import { doc, updateDoc } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const UserProfile = ({ userDetail }) => {
   const { user } = useAuthContext();
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   // user input state
-  const [username, setUsername] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [bio, setBio] = useState("");
-  const [photo, setPhoto] = useState(null);
+  const [username, setUsername] = useState(userDetail.username);
+  const [fullName, setFullName] = useState(userDetail.fullName);
+  const [bio, setBio] = useState(userDetail.bio);
+
+  const [profilePicture, setProfilePicture] = useState();
+  const [preview, setPreview] = useState();
   const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef();
+  const defaultImage = "/blank-profile.png";
+
   useEffect(() => {
     setUsername(userDetail.username);
+    setBio(userDetail.bio);
+    setFullName(userDetail.fullName);
     if (userDetail.photoURL) {
-      setPhoto(userDetail.photoURL);
+      setProfilePicture(userDetail.photoURL);
+    } else {
+      setPreview(defaultImage);
     }
   }, [userDetail]);
 
-  const handlePhoto = (e) => {
+  // preview the image selected
+  // useEffect(() => {
+  //   if (profilePicture) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setPreview(reader.result);
+  //     };
+  //     reader.readAsDataURL(profilePicture);
+  //   } else {
+  //     setPreview(defaultImage);
+  //   }
+  // }, [profilePicture]);
+  // const addProfilePicture = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setProfilePicture(file);
+  //   } else {
+  //     setProfilePicture(null);
+  //   }
+  // };
+  const addProfilePicture = (e) => {
+    const reader = new FileReader();
     if (e.target.files[0]) {
-      setPhoto(e.target.files[0]);
+      setProfilePicture(e.target.files[0]);
+      reader.readAsDataURL(e.target.files[0]);
     }
+    reader.onload = (readerEvent) => {
+      setPreview(readerEvent.target.result);
+    };
   };
-
-  const handleSubmit = async () => {
+  console.log(profilePicture);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
-    await upload(photo, userDetail);
-    // then update profile picture and displayName of auth user then
-    // update users in firestore 1.username = displayName 2.bio 3.photoURL 4.fullname
-    //
+    let imageURL;
+    const userRef = doc(db, "users", user.uid);
+    const fileRef = ref(storage, userDetail.id);
+    await uploadBytes(fileRef, profilePicture);
+    imageURL = await getDownloadURL(fileRef);
+
+    await updateProfile(user, {
+      photoURL: imageURL,
+      displayName: username,
+    }).then(
+      await updateDoc(userRef, {
+        photoURL: imageURL,
+        username: username,
+        bio: bio,
+        fullName: fullName,
+      })
+    );
     setLoading(false);
   };
 
@@ -52,9 +103,7 @@ const UserProfile = ({ userDetail }) => {
       <div className={styles["profile-info"]}>
         <div className={styles["profile-image"]}>
           <Image
-            src={
-              userDetail.photoURL ? userDetail.photoURL : "/blank-profile.png"
-            }
+            src={userDetail.photoURL ? userDetail.photoURL : defaultImage}
             width={150}
             height={150}
             alt="user-profile"
@@ -63,7 +112,7 @@ const UserProfile = ({ userDetail }) => {
         <div className={styles.info}>
           <div className={styles["top-container"]}>
             <h2 className={styles.name}>{userDetail.username}</h2>
-            {user.email === userDetail.emailAddress && (
+            {user?.email === userDetail.emailAddress && (
               <button className="btn btn-sm" onClick={() => setOpenModal(true)}>
                 Edit profile
               </button>
@@ -71,7 +120,7 @@ const UserProfile = ({ userDetail }) => {
 
             <Modal openModal={openModal} onClose={() => setOpenModal(false)}>
               <h3 className={styles["modal-title"]}>Update Profile</h3>
-              <form className="form" onSubmit={handleSubmit}>
+              <form className="form">
                 <label>
                   <span>Username:</span>
                   <input
@@ -96,24 +145,29 @@ const UserProfile = ({ userDetail }) => {
                     value={bio}
                   />
                 </label>
-                <label className={styles.picture} htmlFor="upload">
+                <label className={styles.picture}>
                   <Image
                     src={
-                      userDetail.photoURL
-                        ? userDetail.photoURL
-                        : "/blank-profile.png"
+                      preview || userDetail.photoURL
+                        ? preview || userDetail.photoURL
+                        : defaultImage
                     }
                     width={150}
                     height={150}
                     alt="user-profile"
                     className={styles.image}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      fileInputRef.current.click();
+                    }}
                   />
                   <p>Upload a photo</p>
                   <input
-                    id="upload"
+                    ref={fileInputRef}
                     type="file"
+                    // accept="image/*"
                     className={styles["image-input-file"]}
-                    onChange={handlePhoto}
+                    onChange={addProfilePicture}
                   />
                 </label>
                 <div className="center-items margin-top-sm">
@@ -122,7 +176,9 @@ const UserProfile = ({ userDetail }) => {
                       Loading <Loader />
                     </button>
                   ) : (
-                    <button className="btn">Update profile</button>
+                    <button className="btn" onClick={handleSubmit}>
+                      Update profile
+                    </button>
                   )}
                 </div>
               </form>
