@@ -33,6 +33,9 @@ export const useSignup = () => {
               username: userName.toLowerCase(),
               emailAddress: email.toLowerCase(),
               dateCreated: Date.now(),
+              bio: "",
+              photoURL: "",
+              fullName: "",
             });
 
             dispatch({ type: "LOGIN", payload: user });

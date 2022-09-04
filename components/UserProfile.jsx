@@ -16,9 +16,9 @@ const UserProfile = ({ userDetail }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   // user input state
-  const [username, setUsername] = useState(userDetail.username);
-  const [fullName, setFullName] = useState(userDetail.fullName);
-  const [bio, setBio] = useState(userDetail.bio);
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [bio, setBio] = useState("");
 
   const [profilePicture, setProfilePicture] = useState();
   const [preview, setPreview] = useState();
@@ -30,33 +30,8 @@ const UserProfile = ({ userDetail }) => {
     setUsername(userDetail.username);
     setBio(userDetail.bio);
     setFullName(userDetail.fullName);
-    if (userDetail.photoURL) {
-      setProfilePicture(userDetail.photoURL);
-    } else {
-      setPreview(defaultImage);
-    }
   }, [userDetail]);
-
-  // preview the image selected
-  // useEffect(() => {
-  //   if (profilePicture) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setPreview(reader.result);
-  //     };
-  //     reader.readAsDataURL(profilePicture);
-  //   } else {
-  //     setPreview(defaultImage);
-  //   }
-  // }, [profilePicture]);
-  // const addProfilePicture = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     setProfilePicture(file);
-  //   } else {
-  //     setProfilePicture(null);
-  //   }
-  // };
+  console.log(userDetail.photoURLy);
   const addProfilePicture = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -74,8 +49,12 @@ const UserProfile = ({ userDetail }) => {
     let imageURL;
     const userRef = doc(db, "users", user.uid);
     const fileRef = ref(storage, userDetail.id);
-    await uploadBytes(fileRef, profilePicture);
-    imageURL = await getDownloadURL(fileRef);
+    if (profilePicture) {
+      await uploadBytes(fileRef, profilePicture);
+      imageURL = await getDownloadURL(fileRef);
+    } else {
+      imageURL = userDetail?.photoURL;
+    }
 
     await updateProfile(user, {
       photoURL: imageURL,
