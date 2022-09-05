@@ -39,6 +39,7 @@ const CreateDoc = () => {
       published: publicPost,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
+      id: user.uid,
     })
       .then(async (docRef) => {
         // console.log(docRef.id);
@@ -86,7 +87,7 @@ const CreateDoc = () => {
         <label>
           <span>Content:</span>
           <div>
-            <TextEditor setContent={setContent}  />
+            <TextEditor setContent={setContent} />
           </div>
         </label>
 

@@ -43,7 +43,7 @@ const ProfileDropdown = () => {
         <div className={styles["dropdown-container"]}>
           <div className={styles.dropdown}>
             {/* edit this */}
-            <Link href={`/${username}`}>
+            <Link href={`/${user.uid}`}>
               <div
                 className={styles["dropdown-item"]}
                 onClick={() => setOpen(!open)}

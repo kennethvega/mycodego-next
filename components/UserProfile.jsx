@@ -44,30 +44,36 @@ const UserProfile = ({ userDetail }) => {
   };
   console.log(profilePicture);
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    let imageURL;
-    const userRef = doc(db, "users", user.uid);
-    const fileRef = ref(storage, userDetail.id);
-    if (profilePicture) {
-      await uploadBytes(fileRef, profilePicture);
-      imageURL = await getDownloadURL(fileRef);
-    } else {
-      imageURL = userDetail?.photoURL;
-    }
+    try {
+      e.preventDefault();
+      setLoading(true);
+      let imageURL;
+      const userRef = doc(db, "users", user.uid);
+      const fileRef = ref(storage, userDetail.id);
+      if (profilePicture) {
+        await uploadBytes(fileRef, profilePicture);
+        imageURL = await getDownloadURL(fileRef);
+      } else {
+        imageURL = userDetail?.photoURL;
+      }
 
-    await updateProfile(user, {
-      photoURL: imageURL,
-      displayName: username,
-    }).then(
-      await updateDoc(userRef, {
+      await updateProfile(user, {
         photoURL: imageURL,
-        username: username,
-        bio: bio,
-        fullName: fullName,
-      })
-    );
-    setLoading(false);
+        displayName: username,
+      }).then(
+        await updateDoc(userRef, {
+          photoURL: imageURL,
+          username: username,
+          bio: bio,
+          fullName: fullName,
+        })
+      );
+      setLoading(false);
+      setOpenModal(false);
+      router.reload();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
