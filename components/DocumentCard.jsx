@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./DocumentCard.module.scss";
 import Link from "next/link";
-
-const DocumentCard = ({ post, admin = false }) => {
+const DocumentCard = ({ post }) => {
   // formating date
+
   const d = new Date(post.createdAt);
   const date = d.toLocaleDateString("en-US");
   // format name

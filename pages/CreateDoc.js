@@ -28,7 +28,7 @@ const CreateDoc = () => {
     e.preventDefault();
     setIsLoading(true);
     // firebase query
-    // const docRef = doc(db, "users", `${user.uid}`, "posts");
+    
     const colRef = collection(db, "users", `${user.uid}`, "posts");
     await addDoc(colRef, {
       title: title,

@@ -19,24 +19,15 @@ const ProfileDropdown = () => {
         onClick={() => setOpen(!open)}
       >
         <AiFillDownCircle className={styles["down-circle-svg"]} />
-        {user?.photoUrl ? (
-          <Image
-            // replace this with photoUrl
-            src="/blank-profile.png"
-            width={30}
-            height={30}
-            alt="profile avatar"
-          />
-        ) : (
-          <Image
-            src="/blank-profile.png"
-            className={styles.profile}
-            width={40}
-            height={40}
-            alt="user-profile"
-          />
-          // <BsFillPersonFill className={styles.profile} />
-        )}
+
+        <Image
+          // replace this with photoUrl
+          src={user.photoURL ? user.photoURL : "/blank-profile.png"}
+          width={40}
+          height={40}
+          alt="profile avatar"
+          className={styles.profile}
+        />
       </div>
 
       {open && (

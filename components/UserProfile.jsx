@@ -8,7 +8,15 @@ import Modal from "./Modal";
 import { db, storage, upload } from "../lib/firebase-config";
 import Loader from "./Loader";
 import { updateProfile } from "firebase/auth";
-import { doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  collectionGroup,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const UserProfile = ({ userDetail }) => {
@@ -50,13 +58,14 @@ const UserProfile = ({ userDetail }) => {
       let imageURL;
       const userRef = doc(db, "users", user.uid);
       const fileRef = ref(storage, userDetail.id);
+
       if (profilePicture) {
         await uploadBytes(fileRef, profilePicture);
         imageURL = await getDownloadURL(fileRef);
       } else {
         imageURL = userDetail?.photoURL;
       }
-
+      // update both profile and users document
       await updateProfile(user, {
         photoURL: imageURL,
         displayName: username,
@@ -68,6 +77,22 @@ const UserProfile = ({ userDetail }) => {
           fullName: fullName,
         })
       );
+      // update user posts username
+      const postsData = await getDocs(
+        query(collectionGroup(db, "posts"), where("id", "==", userDetail?.id))
+      );
+      const userPosts = postsData.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      await Promise.all(
+        userPosts.map((post) =>
+          updateDoc(doc(db, "users", `${user.uid}/posts/${post.slug}`), {
+            username: username,
+          })
+        )
+      );
+
       router.replace(router.asPath);
       setLoading(false);
       setOpenModal(false);
@@ -75,7 +100,7 @@ const UserProfile = ({ userDetail }) => {
       console.log(err);
     }
   };
-
+ 
   useEffect(() => {
     if (!user) {
       router.push("/");
@@ -110,7 +135,9 @@ const UserProfile = ({ userDetail }) => {
                   <span>Username:</span>
                   <input
                     type="text"
-                    onChange={(e) => setUsername(e.target.value)}
+                    onChange={(e) =>
+                      setUsername(e.target.value.replace(/\s+/g, "_"))
+                    }
                     value={username}
                   />
                 </label>
@@ -150,14 +177,14 @@ const UserProfile = ({ userDetail }) => {
                   <input
                     ref={fileInputRef}
                     type="file"
-                    // accept="image/*"
+                    accept="image/*"
                     className={styles["image-input-file"]}
                     onChange={addProfilePicture}
                   />
                 </label>
                 <div className="center-items margin-top-sm">
                   {loading ? (
-                    <button className="btn margin-top-sm center-items" disabled>
+                    <button className="btn center-items" disabled>
                       Loading <Loader />
                     </button>
                   ) : (

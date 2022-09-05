@@ -1,11 +1,9 @@
 import React from "react";
 import DocumentCard from "./DocumentCard";
 
-const PostFeed = ({ posts, admin }) => {
+const PostFeed = ({ posts }) => {
   return posts ? (
-    posts.map((post, index) => (
-      <DocumentCard key={index} post={post} admin={admin} />
-    ))
+    posts.map((post) => <DocumentCard key={post.slug} post={post} />)
   ) : (
     <p>No documents</p>
   );
