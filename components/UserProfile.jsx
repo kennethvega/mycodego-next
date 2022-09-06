@@ -5,11 +5,10 @@ import styles from "./UserProfile.module.scss";
 import Image from "next/image";
 
 import Modal from "./Modal";
-import { db, storage, upload } from "../lib/firebase-config";
+import { db, storage } from "../lib/firebase-config";
 import Loader from "./Loader";
 import { updateProfile } from "firebase/auth";
 import {
-  collection,
   collectionGroup,
   doc,
   getDocs,
@@ -19,7 +18,7 @@ import {
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
-const UserProfile = ({ userDetail }) => {
+const UserProfile = ({ userDetail, posts }) => {
   const { user } = useAuthContext();
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
@@ -33,6 +32,7 @@ const UserProfile = ({ userDetail }) => {
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef();
   const defaultImage = "/blank-profile.png";
+  const postedLength = posts.length;
 
   useEffect(() => {
     setUsername(userDetail.username);
@@ -92,7 +92,7 @@ const UserProfile = ({ userDetail }) => {
           })
         )
       );
-
+      // refresh userDetailData without refreshing the whole page
       router.replace(router.asPath);
       setLoading(false);
       setOpenModal(false);
@@ -100,14 +100,7 @@ const UserProfile = ({ userDetail }) => {
       console.log(err);
     }
   };
- 
-  useEffect(() => {
-    if (!user) {
-      router.push("/");
-    } else {
-      return;
-    }
-  });
+
   return (
     <div className="container">
       <div className={styles["profile-info"]}>
@@ -139,6 +132,7 @@ const UserProfile = ({ userDetail }) => {
                       setUsername(e.target.value.replace(/\s+/g, "_"))
                     }
                     value={username}
+                    disabled={loading ? true : false}
                   />
                 </label>
                 <label>
@@ -147,6 +141,7 @@ const UserProfile = ({ userDetail }) => {
                     type="text"
                     onChange={(e) => setFullName(e.target.value)}
                     value={fullName}
+                    disabled={loading ? true : false}
                   />
                 </label>
                 <label>
@@ -155,6 +150,7 @@ const UserProfile = ({ userDetail }) => {
                     type="text"
                     onChange={(e) => setBio(e.target.value)}
                     value={bio}
+                    disabled={loading ? true : false}
                   />
                 </label>
                 <label className={styles.picture}>
@@ -180,6 +176,7 @@ const UserProfile = ({ userDetail }) => {
                     accept="image/*"
                     className={styles["image-input-file"]}
                     onChange={addProfilePicture}
+                    disabled={loading ? true : false}
                   />
                 </label>
                 <div className="center-items margin-top-sm">
@@ -196,13 +193,15 @@ const UserProfile = ({ userDetail }) => {
               </form>
             </Modal>
           </div>
-          <p>{userDetail?.bio}</p>
-          <p>10 documents</p>
+          <p className={styles.fullname}>{userDetail?.fullName}</p>
+          <p className={styles.bio}>{userDetail?.bio}</p>
         </div>
       </div>
 
       <div className={styles["documents-container"]}>
-        <h3 className={styles["post-title"]}>Posted Docs</h3>
+        <h3 className={styles["post-title"]}>
+          Posted Documents {postedLength}
+        </h3>
       </div>
     </div>
   );

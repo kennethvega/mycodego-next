@@ -34,9 +34,6 @@
   gap: 1rem;
   align-items: flex-start;
   justify-content: space-between;
-  & p {
-    font-size: 1.5rem;
-  }
 }
 .name {
   font-size: 3rem;
@@ -63,4 +60,11 @@
 }
 .card-container {
   composes: card-container from "./../styles/home.module.scss";
+}
+
+.fullname {
+  font-size: 2rem;
+}
+.bio {
+  font-size: 1.6rem;
 }

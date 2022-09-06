@@ -12,7 +12,7 @@ const UserProfilePage = ({ posts, user }) => {
     <main className="container margin-top-xl">
       <UserProfile userDetail={user} posts={posts} />
       <div className="card-container">
-        <PostFeed posts={posts} userDetail={user} />
+        <PostFeed posts={posts} />
       </div>
     </main>
   );
