@@ -1,0 +1,51 @@
+.grid-container {
+  margin-top: 5rem;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 10% 1fr 10%;
+}
+.title {
+  font-size: 5rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+}
+.subtitle {
+  display: flex;
+  justify-content: space-between;
+  & p {
+    font-size: 1.5rem;
+  }
+}
+.subtitle {
+  margin-bottom: 5rem;
+}
+.edit {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+}
+.icons {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.heart {
+  cursor: pointer;
+}
+.comment {
+  cursor: pointer;
+}
+.edit-btn {
+  cursor: pointer;
+}
+.delete {
+  fill: #a30f0f;
+  transition: all 0.3s;
+  &:hover {
+    fill: #e72222;
+    cursor: pointer;
+  }
+}
