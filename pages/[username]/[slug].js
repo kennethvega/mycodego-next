@@ -1,47 +1,51 @@
-import { query, collectionGroup, where, getDocs } from "firebase/firestore";
+import {
+  query,
+  collectionGroup,
+  where,
+  getDocs,
+  collection,
+} from "firebase/firestore";
 import React from "react";
+import PostContent from "../../components/PostContent";
 import {
   db,
-  getUserDocWithId,
+  getUserDocWithUsername,
   getUserPost,
   postToJSON,
 } from "../../lib/firebase-config";
 
-const Post = ({ post, path }) => {
-  return <div className="container margin-top-xl"></div>;
-};
-
-export default Post;
-
 export async function getStaticProps({ params }) {
-  const { id, slug } = params;
-  const userDoc = await getUserDocWithId(id);
+  const { username, slug } = params;
+  const userDoc = await getUserDocWithUsername(username);
   let post;
-  let path;
+
   if (!userDoc) {
     return {
       notFound: true,
     };
   }
   if (userDoc) {
-    const postQuery = await getUserPost(id, slug);
-    post = postQuery.docs.map(postToJSON);
-    path = post;
+    const postRef = query(
+      collection(db, `users/${userDoc.id}/posts`),
+      where("slug", "==", slug)
+    );
+    const postDetails = await getDocs(postRef);
+    const postItem = postDetails.docs.map(postToJSON);
+    post = postItem[0];
   }
 
   return {
-    props: { post, path },
+    props: { post },
     revalidate: 5000,
   };
 }
 export async function getStaticPaths() {
   const itemRef = query(collectionGroup(db, "posts"));
   const snapshot = await getDocs(itemRef);
-
   const paths = snapshot.docs.map((doc) => {
-    const { id, slug } = doc.data();
+    const { slug, username } = doc.data();
     return {
-      params: { id, slug },
+      params: { username, slug },
     };
   });
   return {
@@ -49,3 +53,12 @@ export async function getStaticPaths() {
     fallback: "blocking",
   };
 }
+const Post = ({ post }) => {
+  return (
+    <main className="container margin-top-xl">
+      <PostContent post={post} />
+    </main>
+  );
+};
+
+export default Post;

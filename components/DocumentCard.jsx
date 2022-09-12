@@ -9,7 +9,7 @@ const DocumentCard = ({ post }) => {
   // format name
 
   return (
-    <Link href={`/${post.id}/${post.slug}`}>
+    <Link href={`/${post.username}/${post.slug}`}>
       <div className={styles.container}>
         <h3>{post.title}</h3>
         <p>{post.summary}</p>

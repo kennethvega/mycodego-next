@@ -12,6 +12,7 @@
     "@tiptap/extension-underline": "^2.0.0-beta.25",
     "@tiptap/react": "^2.0.0-beta.114",
     "@tiptap/starter-kit": "^2.0.0-beta.191",
+    "dompurify": "^2.4.0",
     "firebase": "^9.9.1",
     "html-react-parser": "^3.0.4",
     "lowlight": "^2.7.0",
