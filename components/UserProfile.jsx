@@ -39,7 +39,7 @@ const UserProfile = ({ userDetail, posts }) => {
     setBio(userDetail.bio);
     setFullName(userDetail.fullName);
   }, [userDetail]);
-  console.log(userDetail.photoURLy);
+
   const addProfilePicture = (e) => {
     const reader = new FileReader();
     if (e.target.files[0]) {
@@ -50,7 +50,7 @@ const UserProfile = ({ userDetail, posts }) => {
       setPreview(readerEvent.target.result);
     };
   };
-  console.log(profilePicture);
+
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -93,7 +93,8 @@ const UserProfile = ({ userDetail, posts }) => {
         )
       );
       // refresh userDetailData without refreshing the whole page
-      router.replace(router.asPath);
+      // router.replace(router.asPath);
+      router.push(`/${username}`);
       setLoading(false);
       setOpenModal(false);
     } catch (err) {

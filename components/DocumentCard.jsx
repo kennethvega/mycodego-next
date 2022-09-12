@@ -15,7 +15,7 @@ const DocumentCard = ({ post }) => {
         <p>{post.summary}</p>
         <footer className={styles.footer}>
           <span>
-            <Link href={`/${post.id}`}>
+            <Link href={`/${post.username}`}>
               <a>
                 Author: <span>@{post.username}</span>
               </a>
