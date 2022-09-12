@@ -89,6 +89,7 @@ const UserProfile = ({ userDetail, posts }) => {
         userPosts.map((post) =>
           updateDoc(doc(db, "users", `${user.uid}/posts/${post.slug}`), {
             username: username,
+            photoURL: user.photoURL,
           })
         )
       );
@@ -111,6 +112,7 @@ const UserProfile = ({ userDetail, posts }) => {
             width={150}
             height={150}
             alt="user-profile"
+            className={styles["user-profile"]}
           />
         </div>
         <div className={styles.info}>
