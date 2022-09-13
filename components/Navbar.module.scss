@@ -57,3 +57,19 @@
     color: var(--hover-text);
   }
 }
+.add {
+  font-size: 2.5rem;
+}
+.add-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem;
+  transition: all 0.3s;
+  border-radius: 50%;
+  background: var(--gray-bg);
+  &:hover {
+    background: var(--hover-gray-bg);
+  }
+}

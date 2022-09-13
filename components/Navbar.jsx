@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import Theme from "./Theme";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import { GoPlus } from "react-icons/go";
 import ProfileDropdown from "./ProfileDropdown";
 const Navbar = () => {
   const { user } = useAuthContext();
@@ -30,6 +30,12 @@ const Navbar = () => {
         )}
         {user && (
           <div className={styles.list}>
+            <Link href="/CreateDoc">
+              <div className={styles["add-container"]}>
+                <GoPlus className={styles.add} title="Create a document" />
+              </div>
+            </Link>
+
             <Theme />
             <ProfileDropdown />
           </div>
