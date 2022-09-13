@@ -10,7 +10,7 @@ import PostContent from "../../components/PostContent";
 import {
   db,
   getUserDocWithUsername,
-  getUserPost,
+
   postToJSON,
 } from "../../lib/firebase-config";
 

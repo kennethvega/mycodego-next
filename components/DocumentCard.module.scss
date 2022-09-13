@@ -8,6 +8,8 @@
   border-radius: 5px;
   transition: all 0.3s;
   overflow: hidden;
+  word-wrap: break-word;
+  object-fit: cover;
   &:hover {
     background-color: var(--hover-gray-bg);
   }
