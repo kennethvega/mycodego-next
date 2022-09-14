@@ -4,6 +4,10 @@
   gap: 3rem;
   grid-template-columns: 10% 1fr 10%;
 }
+.content {
+  overflow: hidden;
+  word-wrap: break-word;
+}
 .title {
   font-size: 5rem;
   font-weight: 900;
@@ -11,7 +15,7 @@
 }
 .subtitle {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   & p {
     font-size: 1.5rem;
   }
@@ -52,6 +56,14 @@
 .small-image {
   border-radius: 50%;
 }
-.info {
+.info-container {
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5rem;
+}
+.info {
+  display: flex;
+
+  gap: 100%;
 }

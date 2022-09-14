@@ -4,7 +4,7 @@ import DOMPurify from "dompurify";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { AiOutlineHeart, AiFillHeart, AiFillDelete } from "react-icons/ai";
 import { BiCommentDetail, BiEdit } from "react-icons/bi";
-import Image from "next/image";
+
 import Link from "next/link";
 const PostContent = ({ post }) => {
   const d = new Date(post.createdAt);
@@ -18,24 +18,14 @@ const PostContent = ({ post }) => {
       </div>
       <div className={styles.content}>
         <h1 className={styles.title}>{post.title}</h1>
-        <div className={styles.subtitle}>
-          <div className={styles.info}>
-            <p>
-              Author:
-              {post.photoURL && (
-                <Image
-                  src={post.photoURL}
-                  width={15}
-                  height={15}
-                  alt="author image"
-                  className={styles["small-image"]}
-                />
-              )}
-              <Link href={`/${post.username}`}>{post.username}</Link>
-            </p>
-          </div>
+
+        <div className={styles["info-container"]}>
+          <p>
+            Author: <Link href={`/${post.username}`}>{post.username}</Link>
+          </p>
           <p>{date.padStart(2, "0")}</p>
         </div>
+
         <div
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         ></div>
@@ -43,8 +33,10 @@ const PostContent = ({ post }) => {
       {user?.displayName === post.username && (
         <div className={styles.edit}>
           <div className={styles.icons}>
-            <BiEdit className={styles["edit-btn"]} />
-            <AiFillDelete className={styles.delete} />
+            <Link href={`/editpost/${post.slug}`}>
+              <BiEdit className={styles["edit-btn"]} title="edit post" />
+            </Link>
+            <AiFillDelete className={styles.delete} title="delete post" />
           </div>
         </div>
       )}

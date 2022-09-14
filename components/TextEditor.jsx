@@ -143,15 +143,17 @@ const MenuBar = ({ editor }) => {
   );
 };
 
-const TextEditor = ({ setContent }) => {
+const TextEditor = ({ setTiptapContent, tiptapContent }) => {
   const editor = useEditor({
     extensions: [StarterKit, Underline],
 
-    content: `
+    content: `${tiptapContent ? `${tiptapContent}` : ""}
+    
     `,
+    editable: true,
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
-      setContent(html);
+      setTiptapContent(html);
     },
   });
 

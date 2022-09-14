@@ -1,65 +1,45 @@
+import { doc, serverTimestamp, updateDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { RiEarthFill } from "react-icons/ri";
 import { AiFillLock } from "react-icons/ai";
 import { BsCircle, BsFillCheckCircleFill } from "react-icons/bs";
-import TextEditor from "../components/TextEditor";
+import { RiEarthFill } from "react-icons/ri";
+import Loader from "../../components/Loader";
+import TextEditor from "../../components/TextEditor";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { db, getPost, postToJSON } from "../../lib/firebase-config";
 
-// firebase
-import {
-  collection,
-  addDoc,
-  updateDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { db } from "../lib/firebase-config";
-import { useAuthContext } from "../hooks/useAuthContext";
-import Loader from "../components/Loader";
-import { useRouter } from "next/router";
-const CreateDoc = () => {
-  const [title, setTitle] = useState("");
-  const [summary, setSummary] = useState("");
-  const [tiptapContent, setTiptapContent] = useState("");
+const EditPostContent = ({ post }) => {
+  const [title, setTitle] = useState(post?.title);
+  const [summary, setSummary] = useState(post?.summary);
+  const [tiptapContent, setTiptapContent] = useState(post?.content);
   const [isLoading, setIsLoading] = useState(false);
   const [publicPost, setPublicPost] = useState(true);
   const { user } = useAuthContext();
   const router = useRouter();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     // firebase query
 
-    const colRef = collection(db, "users", `${user.uid}`, "posts");
-    await addDoc(colRef, {
+    const colRef = doc(db, "users", `${user.uid}`, "posts", `${post.slug}`);
+    await updateDoc(colRef, {
       title: title,
       summary: summary,
       content: tiptapContent,
-      username: user.displayName,
-      slug: "",
       published: publicPost,
-      createdAt: serverTimestamp(),
+
       updatedAt: serverTimestamp(),
-      id: user.uid,
-      photoURL: user.photoURL,
-    })
-      .then(async (docRef) => {
-        // console.log(docRef.id);
-        await updateDoc(docRef, {
-          slug: docRef.id,
-        });
-        router.push("/");
-      })
-
-      .catch((error) => {
-        console.log(error);
-      });
+    }).catch((error) => {
+      console.log(error);
+    });
     setIsLoading(false);
+    router.push(`/${post.username}/${post.slug}`);
   };
-
   return (
     <div className="container margin-top-xl">
       <form className="form mx-width-large" onSubmit={handleSubmit}>
-        <h2>Create a doc</h2>
+        <h2>Update document</h2>
         <label>
           <span>Title:</span>
           <input
@@ -90,10 +70,13 @@ const CreateDoc = () => {
         <label>
           <span>Content:</span>
           <div>
-            <TextEditor setTiptapContent={setTiptapContent} />
+            <TextEditor
+              setTiptapContent={setTiptapContent}
+              tiptapContent={tiptapContent}
+            />
           </div>
         </label>
-
+        {console.log(tiptapContent)}
         <div className="public-toggle">
           <div onClick={() => setPublicPost(true)} className="toggle-svg">
             {publicPost ? (
@@ -120,10 +103,21 @@ const CreateDoc = () => {
             Loading <Loader />
           </button>
         )}
-        {!isLoading && <button className="btn margin-top-sm">Submit</button>}
+        {!isLoading && <button className="btn margin-top-sm">Update</button>}
       </form>
     </div>
   );
 };
 
-export default CreateDoc;
+export default EditPostContent;
+export async function getServerSideProps({ query }) {
+  const { slug } = query;
+  let post;
+  const postDetails = await getPost(slug);
+  const postItem = postDetails.docs.map(postToJSON);
+  post = postItem[0];
+
+  return {
+    props: { post },
+  };
+}
