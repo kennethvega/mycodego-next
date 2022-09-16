@@ -7,6 +7,8 @@ import { BiCommentDetail, BiEdit } from "react-icons/bi";
 
 import Link from "next/link";
 const PostContent = ({ post }) => {
+  // add a delete functionality here
+
   const d = new Date(post.createdAt);
   const date = d.toLocaleDateString("en-US");
   const { user } = useAuthContext();

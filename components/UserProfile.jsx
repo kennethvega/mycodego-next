@@ -5,7 +5,7 @@ import styles from "./UserProfile.module.scss";
 import Image from "next/image";
 
 import Modal from "./Modal";
-import { db, storage } from "../lib/firebase-config";
+import { checkUserWithUsername, db, storage } from "../lib/firebase-config";
 import Loader from "./Loader";
 import { updateProfile } from "firebase/auth";
 import {
@@ -26,14 +26,14 @@ const UserProfile = ({ userDetail, posts }) => {
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
   const [bio, setBio] = useState("");
-
+  const [error, setError] = useState("");
   const [profilePicture, setProfilePicture] = useState();
   const [preview, setPreview] = useState();
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef();
   const defaultImage = "/blank-profile.png";
   const postedLength = posts.length;
-
+  const userName = username;
   useEffect(() => {
     setUsername(userDetail.username);
     setBio(userDetail.bio);
@@ -52,54 +52,114 @@ const UserProfile = ({ userDetail, posts }) => {
   };
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      setLoading(true);
-      let imageURL;
-      const userRef = doc(db, "users", user.uid);
-      const fileRef = ref(storage, userDetail.id);
+    e.preventDefault();
+    if (userDetail.username === username) {
+      try {
+        setLoading(true);
+        let imageURL;
+        const userRef = doc(db, "users", user.uid);
+        const fileRef = ref(storage, userDetail.id);
 
-      if (profilePicture) {
-        await uploadBytes(fileRef, profilePicture);
-        imageURL = await getDownloadURL(fileRef);
-      } else {
-        imageURL = userDetail?.photoURL;
-      }
-      // update both profile and users document
-      await updateProfile(user, {
-        photoURL: imageURL,
-        displayName: username,
-      }).then(
-        await updateDoc(userRef, {
+        if (profilePicture) {
+          await uploadBytes(fileRef, profilePicture);
+          imageURL = await getDownloadURL(fileRef);
+        } else {
+          imageURL = userDetail?.photoURL;
+        }
+        // update both profile and users document
+        await updateProfile(user, {
           photoURL: imageURL,
-          username: username,
-          bio: bio,
-          fullName: fullName,
-        })
-      );
-      // update user posts username
-      const postsData = await getDocs(
-        query(collectionGroup(db, "posts"), where("id", "==", userDetail?.id))
-      );
-      const userPosts = postsData.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      await Promise.all(
-        userPosts.map((post) =>
-          updateDoc(doc(db, "users", `${user.uid}/posts/${post.slug}`), {
+          displayName: username,
+        }).then(
+          await updateDoc(userRef, {
+            photoURL: imageURL,
             username: username,
-            photoURL: user.photoURL,
+            bio: bio,
+            fullName: fullName,
           })
-        )
-      );
-      // refresh userDetailData without refreshing the whole page
-      // router.replace(router.asPath);
-      router.push(`/${username}`);
-      setLoading(false);
-      setOpenModal(false);
-    } catch (err) {
-      console.log(err);
+        );
+        // update user posts username
+        const postsData = await getDocs(
+          query(collectionGroup(db, "posts"), where("id", "==", userDetail?.id))
+        );
+        const userPosts = postsData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        await Promise.all(
+          userPosts.map((post) =>
+            updateDoc(doc(db, "users", `${user.uid}/posts/${post.slug}`), {
+              username: username,
+              photoURL: user.photoURL,
+            })
+          )
+        );
+        // refresh userDetailData without refreshing the whole page
+        // router.replace(router.asPath);
+        router.push(`/${username}`);
+        setLoading(false);
+        setOpenModal(false);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      const userNameTaken = await checkUserWithUsername(userName);
+      if (!userNameTaken) {
+        try {
+          setLoading(true);
+          let imageURL;
+          const userRef = doc(db, "users", user.uid);
+          const fileRef = ref(storage, userDetail.id);
+
+          if (profilePicture) {
+            await uploadBytes(fileRef, profilePicture);
+            imageURL = await getDownloadURL(fileRef);
+          } else {
+            imageURL = userDetail?.photoURL;
+          }
+          // update both profile and users document
+          await updateProfile(user, {
+            photoURL: imageURL,
+            displayName: username,
+          }).then(
+            await updateDoc(userRef, {
+              photoURL: imageURL,
+              username: username,
+              bio: bio,
+              fullName: fullName,
+            })
+          );
+          // update user posts username
+          const postsData = await getDocs(
+            query(
+              collectionGroup(db, "posts"),
+              where("id", "==", userDetail?.id)
+            )
+          );
+          const userPosts = postsData.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          await Promise.all(
+            userPosts.map((post) =>
+              updateDoc(doc(db, "users", `${user.uid}/posts/${post.slug}`), {
+                username: username,
+                photoURL: user.photoURL,
+              })
+            )
+          );
+          // refresh userDetailData without refreshing the whole page
+          // router.replace(router.asPath);
+          router.push(`/${username}`);
+          setLoading(false);
+          setOpenModal(false);
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        setError("username is already taken. please try another");
+        setLoading(false);
+      }
     }
   };
 
@@ -132,7 +192,9 @@ const UserProfile = ({ userDetail, posts }) => {
                   <input
                     type="text"
                     onChange={(e) =>
-                      setUsername(e.target.value.replace(/\s+/g, "_"))
+                      setUsername(
+                        e.target.value.replace(/\s+/g, "_").toLocaleLowerCase()
+                      )
                     }
                     value={username}
                     disabled={loading ? true : false}
@@ -182,6 +244,7 @@ const UserProfile = ({ userDetail, posts }) => {
                     disabled={loading ? true : false}
                   />
                 </label>
+                <p className="error">{error}</p>
                 <div className="center-items margin-top-sm">
                   {loading ? (
                     <button className="btn center-items" disabled>

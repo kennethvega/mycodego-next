@@ -52,7 +52,11 @@ const Signup = () => {
           <input
             type="text"
             required
-            onChange={(e) => setUserName(e.target.value.replace(/\s+/g, "_"))}
+            onChange={(e) =>
+              setUserName(
+                e.target.value.replace(/\s+/g, "_").toLocaleLowerCase()
+              )
+            }
             value={userName}
           />
         </label>
