@@ -99,6 +99,7 @@ const UserProfile = ({ userDetail, posts }) => {
         router.push(`/${username}`);
         setLoading(false);
         setOpenModal(false);
+        setError("");
       } catch (err) {
         console.log(err);
       }
@@ -153,6 +154,7 @@ const UserProfile = ({ userDetail, posts }) => {
           router.push(`/${username}`);
           setLoading(false);
           setOpenModal(false);
+          setError("");
         } catch (err) {
           console.log(err);
         }

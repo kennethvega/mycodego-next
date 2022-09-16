@@ -107,8 +107,10 @@ pre {
   font-family: "Inter", sans-serif;
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
-
   margin-top: 1rem;
+  overflow: scroll;
+  word-wrap: break-word;
+  object-fit: cover;
   code {
     color: inherit;
     padding: 0;
