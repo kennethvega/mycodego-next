@@ -4,7 +4,8 @@ import "../styles/utility.scss";
 import "../styles/TextEditor.scss";
 import Layout from "../components/Layout";
 import { AuthContextProvider } from "../context/AuthContext";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider>
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </Layout>
       </AuthContextProvider>
+      <ToastContainer />
     </ThemeProvider>
   );
 }

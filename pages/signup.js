@@ -4,6 +4,7 @@ import { useSignup } from "../hooks/useSignup";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { toast } from "react-toastify";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,7 +23,8 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    signup(email, password, userName);
+    await signup(email, password, userName);
+    router.push("/");
   };
 
   return (

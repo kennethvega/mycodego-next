@@ -8,7 +8,7 @@ import Loader from "../../components/Loader";
 import TextEditor from "../../components/TextEditor";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { db, getPost, postToJSON } from "../../lib/firebase-config";
-
+import { toast } from "react-toastify";
 const EditPostContent = ({ post }) => {
   const [title, setTitle] = useState(post?.title);
   const [summary, setSummary] = useState(post?.summary);
@@ -21,7 +21,6 @@ const EditPostContent = ({ post }) => {
     e.preventDefault();
     setIsLoading(true);
     // firebase query
-
     const colRef = doc(db, "users", `${user.uid}`, "posts", `${post.slug}`);
     await updateDoc(colRef, {
       title: title,
@@ -33,8 +32,9 @@ const EditPostContent = ({ post }) => {
     }).catch((error) => {
       console.log(error);
     });
+    await router.push(`/${post.username}/${post.slug}`);
     setIsLoading(false);
-    router.push(`/${post.username}/${post.slug}`);
+    toast.success("Successfully edited post.");
   };
   return (
     <div className="container margin-top-xl">

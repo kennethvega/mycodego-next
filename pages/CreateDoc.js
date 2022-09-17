@@ -3,7 +3,7 @@ import { RiEarthFill } from "react-icons/ri";
 import { AiFillLock } from "react-icons/ai";
 import { BsCircle, BsFillCheckCircleFill } from "react-icons/bs";
 import TextEditor from "../components/TextEditor";
-
+import { toast } from "react-toastify";
 // firebase
 import {
   collection,
@@ -28,7 +28,6 @@ const CreateDoc = () => {
     e.preventDefault();
     setIsLoading(true);
     // firebase query
-
     const colRef = collection(db, "users", `${user.uid}`, "posts");
     await addDoc(colRef, {
       title: title,
@@ -54,6 +53,7 @@ const CreateDoc = () => {
         console.log(error);
       });
     setIsLoading(false);
+    toast.success("Successfully created post.");
   };
 
   return (

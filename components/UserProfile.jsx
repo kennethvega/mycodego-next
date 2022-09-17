@@ -17,7 +17,7 @@ import {
   where,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-
+import { toast } from "react-toastify";
 const UserProfile = ({ userDetail, posts }) => {
   const { user } = useAuthContext();
   const router = useRouter();
@@ -96,8 +96,9 @@ const UserProfile = ({ userDetail, posts }) => {
         );
         // refresh userDetailData without refreshing the whole page
         // router.replace(router.asPath);
-        router.push(`/${username}`);
+        await router.push(`/${username}`);
         setLoading(false);
+        toast.success("Profile updated");
         setOpenModal(false);
         setError("");
       } catch (err) {
@@ -151,7 +152,8 @@ const UserProfile = ({ userDetail, posts }) => {
           );
           // refresh userDetailData without refreshing the whole page
           // router.replace(router.asPath);
-          router.push(`/${username}`);
+          await router.push(`/${username}`);
+          toast.success("Profile updated");
           setLoading(false);
           setOpenModal(false);
           setError("");

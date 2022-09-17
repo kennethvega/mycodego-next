@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { checkUserWithUsername } from "../lib/firebase-config";
 import { setDoc, doc, addDoc, collection } from "firebase/firestore";
 import { db } from "../lib/firebase-config";
+import { toast } from "react-toastify";
 export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
@@ -44,10 +45,12 @@ export const useSignup = () => {
         );
         setIsPending(false);
         setError(null);
+        toast.success("Successfully created an account🎊.");
       } catch (err) {
         console.log(err.message);
         setError(err.message);
         setIsPending(false);
+        toast.error(`${err.message}`);
       }
     } else {
       setError("username is already taken. please try again");

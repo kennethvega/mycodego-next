@@ -70,7 +70,9 @@ html {
     }
   }
 }
-
+a {
+  color: var(--text);
+}
 .public-toggle-container {
   display: flex;
   flex-direction: column;

@@ -10,6 +10,7 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../lib/firebase-config";
 import { useRouter } from "next/router";
 import Loader from "./Loader";
+import { toast } from "react-toastify";
 const PostContent = ({ post }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
@@ -23,6 +24,7 @@ const PostContent = ({ post }) => {
     setLoading(false);
     await router.push("/");
     setOpenModal(false);
+    toast.success("Successfully deleted post!");
   };
 
   const d = new Date(post.createdAt);
