@@ -24,7 +24,6 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signup(email, password, userName);
-    router.push("/");
   };
 
   return (

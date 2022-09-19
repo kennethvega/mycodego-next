@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+}
+
+.icon {
+  cursor: pointer;
+}
+.icon-fill {
+  fill: #a30f0f;
+  transition: all 0.3s;
+  &:hover {
+    fill: #e72222;
+    cursor: pointer;
+  }
+}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./PostContent.module.scss";
 import DOMPurify from "dompurify";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { AiOutlineHeart, AiFillHeart, AiFillDelete } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
 import { BiCommentDetail, BiEdit } from "react-icons/bi";
 import Modal from "./Modal";
 import Link from "next/link";
@@ -11,11 +11,12 @@ import { db } from "../lib/firebase-config";
 import { useRouter } from "next/router";
 import Loader from "./Loader";
 import { toast } from "react-toastify";
+import Hearts from "./Hearts";
 const PostContent = ({ post }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
-  // add a delete functionality here
+
   const handleDelete = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -30,10 +31,12 @@ const PostContent = ({ post }) => {
   const d = new Date(post.createdAt);
   const date = d.toLocaleDateString("en-US");
   const { user } = useAuthContext();
+
   return (
     <div className={styles["grid-container"]}>
       <div className={styles.icons}>
-        <AiOutlineHeart className={styles.heart} />
+        <Hearts hearts={post.hearts} slug={post.slug} id={post.id} />
+
         <BiCommentDetail className={styles.comment} />
       </div>
       <div className={styles.content}>

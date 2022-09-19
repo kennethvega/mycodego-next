@@ -4,20 +4,21 @@ import {
   where,
   getDocs,
   collection,
+  onSnapshot,
 } from "firebase/firestore";
+import { useRouter } from "next/router";
 import React from "react";
 import PostContent from "../../components/PostContent";
 import {
   db,
   getUserDocWithUsername,
-
   postToJSON,
 } from "../../lib/firebase-config";
 
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
   const userDoc = await getUserDocWithUsername(username);
-  let post;
+  let post = null;
 
   if (!userDoc) {
     return {
@@ -29,14 +30,16 @@ export async function getStaticProps({ params }) {
       collection(db, `users/${userDoc.id}/posts`),
       where("slug", "==", slug)
     );
+
     const postDetails = await getDocs(postRef);
     const postItem = postDetails.docs.map(postToJSON);
     post = postItem[0];
+    console.log(post);
   }
 
   return {
     props: { post },
-    revalidate: 5000,
+    revalidate: 1000,
   };
 }
 export async function getStaticPaths() {

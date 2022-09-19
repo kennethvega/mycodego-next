@@ -5,7 +5,12 @@ import styles from "./UserProfile.module.scss";
 import Image from "next/image";
 
 import Modal from "./Modal";
-import { checkUserWithUsername, db, storage } from "../lib/firebase-config";
+import {
+  checkUserWithUsername,
+  db,
+  storage,
+  updateUserProfile,
+} from "../lib/firebase-config";
 import Loader from "./Loader";
 import { updateProfile } from "firebase/auth";
 import {
@@ -51,49 +56,52 @@ const UserProfile = ({ userDetail, posts }) => {
     };
   };
 
+  const updateUserProfile = async () => {
+    let imageURL;
+    const userRef = doc(db, "users", user.uid);
+    const fileRef = ref(storage, userDetail.id);
+    if (profilePicture) {
+      await uploadBytes(fileRef, profilePicture);
+      imageURL = await getDownloadURL(fileRef);
+    } else {
+      imageURL = userDetail?.photoURL;
+    }
+    // update both profile and users document
+    await updateProfile(user, {
+      photoURL: imageURL,
+      displayName: username,
+    }).then(
+      await updateDoc(userRef, {
+        photoURL: imageURL,
+        username: username,
+        bio: bio,
+        fullName: fullName,
+      })
+    );
+    // update user posts username
+    const postsData = await getDocs(
+      query(collectionGroup(db, "posts"), where("id", "==", userDetail?.id))
+    );
+    const userPosts = postsData.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
+    await Promise.all(
+      userPosts.map((post) =>
+        updateDoc(doc(db, "users", `${user.uid}/posts/${post.slug}`), {
+          username: username,
+          photoURL: user.photoURL,
+        })
+      )
+    );
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userDetail.username === username) {
       try {
         setLoading(true);
-        let imageURL;
-        const userRef = doc(db, "users", user.uid);
-        const fileRef = ref(storage, userDetail.id);
-
-        if (profilePicture) {
-          await uploadBytes(fileRef, profilePicture);
-          imageURL = await getDownloadURL(fileRef);
-        } else {
-          imageURL = userDetail?.photoURL;
-        }
-        // update both profile and users document
-        await updateProfile(user, {
-          photoURL: imageURL,
-          displayName: username,
-        }).then(
-          await updateDoc(userRef, {
-            photoURL: imageURL,
-            username: username,
-            bio: bio,
-            fullName: fullName,
-          })
-        );
-        // update user posts username
-        const postsData = await getDocs(
-          query(collectionGroup(db, "posts"), where("id", "==", userDetail?.id))
-        );
-        const userPosts = postsData.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
-        await Promise.all(
-          userPosts.map((post) =>
-            updateDoc(doc(db, "users", `${user.uid}/posts/${post.slug}`), {
-              username: username,
-              photoURL: user.photoURL,
-            })
-          )
-        );
+        await updateUserProfile();
         // refresh userDetailData without refreshing the whole page
         // router.replace(router.asPath);
         await router.push(`/${username}`);
@@ -106,50 +114,11 @@ const UserProfile = ({ userDetail, posts }) => {
       }
     } else {
       const userNameTaken = await checkUserWithUsername(userName);
+
       if (!userNameTaken) {
         try {
           setLoading(true);
-          let imageURL;
-          const userRef = doc(db, "users", user.uid);
-          const fileRef = ref(storage, userDetail.id);
-
-          if (profilePicture) {
-            await uploadBytes(fileRef, profilePicture);
-            imageURL = await getDownloadURL(fileRef);
-          } else {
-            imageURL = userDetail?.photoURL;
-          }
-          // update both profile and users document
-          await updateProfile(user, {
-            photoURL: imageURL,
-            displayName: username,
-          }).then(
-            await updateDoc(userRef, {
-              photoURL: imageURL,
-              username: username,
-              bio: bio,
-              fullName: fullName,
-            })
-          );
-          // update user posts username
-          const postsData = await getDocs(
-            query(
-              collectionGroup(db, "posts"),
-              where("id", "==", userDetail?.id)
-            )
-          );
-          const userPosts = postsData.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }));
-          await Promise.all(
-            userPosts.map((post) =>
-              updateDoc(doc(db, "users", `${user.uid}/posts/${post.slug}`), {
-                username: username,
-                photoURL: user.photoURL,
-              })
-            )
-          );
+          await updateUserProfile();
           // refresh userDetailData without refreshing the whole page
           // router.replace(router.asPath);
           await router.push(`/${username}`);
