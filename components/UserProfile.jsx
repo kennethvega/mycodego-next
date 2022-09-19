@@ -94,6 +94,11 @@ const UserProfile = ({ userDetail, posts }) => {
         })
       )
     );
+    await router.push(`/${username}`);
+    setLoading(false);
+    setOpenModal(false);
+    setError("");
+    toast.success("Profile updated");
   };
 
   const handleSubmit = async (e) => {
@@ -102,30 +107,15 @@ const UserProfile = ({ userDetail, posts }) => {
       try {
         setLoading(true);
         await updateUserProfile();
-        // refresh userDetailData without refreshing the whole page
-        // router.replace(router.asPath);
-        await router.push(`/${username}`);
-        setLoading(false);
-        toast.success("Profile updated");
-        setOpenModal(false);
-        setError("");
       } catch (err) {
         console.log(err);
       }
     } else {
       const userNameTaken = await checkUserWithUsername(userName);
-
       if (!userNameTaken) {
         try {
           setLoading(true);
           await updateUserProfile();
-          // refresh userDetailData without refreshing the whole page
-          // router.replace(router.asPath);
-          await router.push(`/${username}`);
-          toast.success("Profile updated");
-          setLoading(false);
-          setOpenModal(false);
-          setError("");
         } catch (err) {
           console.log(err);
         }
