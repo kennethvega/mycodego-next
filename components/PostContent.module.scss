@@ -1,8 +1,8 @@
 .grid-container {
   margin-top: 5rem;
   display: grid;
-  gap: 3rem;
-  grid-template-columns: 10% 1fr 10%;
+  gap: 1rem;
+  grid-template-columns: 5rem 1fr;
 }
 .content {
   overflow: hidden;
@@ -17,24 +17,11 @@
   display: flex;
   flex-direction: column;
   & p {
-    font-size: 1.5rem;
+    font-size: 16px;
   }
 }
 .subtitle {
   margin-bottom: 5rem;
-}
-.edit {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 2rem;
-}
-.icons {
-  margin-top: 1rem;
-  font-size: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
 }
 
 .comment {
@@ -46,6 +33,7 @@
 .delete {
   fill: #a30f0f;
   transition: all 0.3s;
+
   &:hover {
     fill: #e72222;
     cursor: pointer;
@@ -73,4 +61,25 @@
   display: flex;
   justify-content: space-around;
   margin-top: 5rem;
+}
+.icons {
+  height: 10rem;
+  position: sticky;
+  top: 13rem;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.edit-buttons {
+  width: 100%;
+  font-size: 25px;
+  display: flex;
+  gap: 3rem;
+  justify-content: flex-end;
+}
+.content-container {
+  word-break: break-word;
 }

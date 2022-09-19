@@ -16,25 +16,27 @@ const Hearts = ({ hearts, slug, id }) => {
   const heartRef = doc(db, "users", `${id}`, "posts", `${slug}`);
   const handleHearts = async (e) => {
     e.preventDefault();
-    if (hearts?.includes(user.uid)) {
-      await updateDoc(heartRef, {
-        hearts: arrayRemove(user.uid),
-      }).catch((err) => {
-        console.log(err);
-      });
-      refreshData();
-    } else {
-      await updateDoc(heartRef, {
-        hearts: arrayUnion(user.uid),
-      }).catch((err) => {
-        console.log(err);
-      });
-      refreshData();
+    if (user) {
+      if (hearts?.includes(user?.uid)) {
+        await updateDoc(heartRef, {
+          hearts: arrayRemove(user?.uid),
+        }).catch((err) => {
+          console.log(err);
+        });
+        refreshData();
+      } else {
+        await updateDoc(heartRef, {
+          hearts: arrayUnion(user?.uid),
+        }).catch((err) => {
+          console.log(err);
+        });
+        refreshData();
+      }
     }
   };
   return (
     <div className={styles.container} onClick={handleHearts}>
-      {hearts?.includes(user.uid) ? (
+      {hearts?.includes(user?.uid) ? (
         <AiFillHeart className={styles["icon-fill"]} />
       ) : (
         <AiOutlineHeart className={styles.icon} />

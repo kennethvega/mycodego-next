@@ -34,7 +34,6 @@ export async function getStaticProps({ params }) {
     const postDetails = await getDocs(postRef);
     const postItem = postDetails.docs.map(postToJSON);
     post = postItem[0];
-    console.log(post);
   }
 
   return {

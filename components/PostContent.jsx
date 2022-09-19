@@ -36,39 +36,39 @@ const PostContent = ({ post }) => {
     <div className={styles["grid-container"]}>
       <div className={styles.icons}>
         <Hearts hearts={post.hearts} slug={post.slug} id={post.id} />
-
         <BiCommentDetail className={styles.comment} />
       </div>
-      <div className={styles.content}>
-        <h1 className={styles.title}>{post.title}</h1>
 
+      <div className={styles.content}>
+        {user?.displayName === post.username && (
+          <div className={styles.edit}>
+            <div className={styles["edit-buttons"]}>
+              <Link href={`/editpost/${post.slug}`}>
+                <a>
+                  <BiEdit className={styles["edit-btn"]} title="edit post" />
+                </a>
+              </Link>
+              <AiFillDelete
+                className={styles.delete}
+                title="delete post"
+                onClick={() => setOpenModal(true)}
+              />
+            </div>
+          </div>
+        )}
+        <h1 className={styles.title}>{post.title}</h1>
         <div className={styles["info-container"]}>
           <p>
             Author: <Link href={`/${post.username}`}>{post.username}</Link>
           </p>
           <p>{date.padStart(2, "0")}</p>
         </div>
-
         <div
+          className={styles["content-container"]}
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         ></div>
       </div>
-      {user?.displayName === post.username && (
-        <div className={styles.edit}>
-          <div className={styles.icons}>
-            <Link href={`/editpost/${post.slug}`}>
-              <a>
-                <BiEdit className={styles["edit-btn"]} title="edit post" />
-              </a>
-            </Link>
-            <AiFillDelete
-              className={styles.delete}
-              title="delete post"
-              onClick={() => setOpenModal(true)}
-            />
-          </div>
-        </div>
-      )}
+
       <Modal openModal={openModal} onClose={() => setOpenModal(false)}>
         <h2 className={styles["modal-title"]}>
           Are you sure you want to delete this document ?

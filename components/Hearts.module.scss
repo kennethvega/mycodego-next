@@ -4,12 +4,11 @@
 
 .icon {
   cursor: pointer;
+  font-size: 25px;
 }
 .icon-fill {
-  fill: #a30f0f;
+  fill: #e72222;
   transition: all 0.3s;
-  &:hover {
-    fill: #e72222;
-    cursor: pointer;
-  }
+  cursor: pointer;
+  font-size: 25px;
 }
