@@ -36,7 +36,6 @@ export const useSignup = () => {
               dateCreated: Date.now(),
               bio: "",
               photoURL: "",
-              fullName: "",
             });
 
             dispatch({ type: "LOGIN", payload: user });

@@ -100,7 +100,7 @@ const EditPostContent = ({ post }) => {
 
         {isLoading && (
           <button className="btn margin-top-sm center-items" disabled>
-            Loading <Loader />
+            Updating <Loader />
           </button>
         )}
         {!isLoading && <button className="btn margin-top-sm">Update</button>}

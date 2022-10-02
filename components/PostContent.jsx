@@ -12,10 +12,32 @@ import { useRouter } from "next/router";
 import Loader from "./Loader";
 import { toast } from "react-toastify";
 import Hearts from "./Hearts";
+import CapitalizeStringName from "../helpers/CapitalizeStringName";
+import Image from "next/image";
 const PostContent = ({ post }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  // format date
+  const d = new Date(post.createdAt);
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let month = months[d.getMonth()];
+  const day = d.getDate();
+  const year = d.getFullYear();
+  const date = `${month}, ${day}, ${year}`;
 
   const handleDelete = async (e) => {
     e.preventDefault();
@@ -27,9 +49,8 @@ const PostContent = ({ post }) => {
     setOpenModal(false);
     toast.success("Successfully deleted post!");
   };
+  const displayName = CapitalizeStringName(post);
 
-  const d = new Date(post.createdAt);
-  const date = d.toLocaleDateString("en-US");
   const { user } = useAuthContext();
 
   return (
@@ -58,11 +79,21 @@ const PostContent = ({ post }) => {
         )}
         <h1 className={styles.title}>{post.title}</h1>
         <div className={styles["info-container"]}>
-          <p>
-            Author: <Link href={`/${post.username}`}>{post.username}</Link>
-          </p>
+          <Link href={`/${post.username}`}>
+            <p className={styles.username}>
+              <Image
+                src={post.photoURL ? post.photoURL : defaultImage}
+                width={30}
+                height={30}
+                alt="author-image"
+                className={styles.image}
+              />
+              {displayName}
+            </p>
+          </Link>
           <p>{date.padStart(2, "0")}</p>
         </div>
+
         <div
           className={styles["content-container"]}
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}

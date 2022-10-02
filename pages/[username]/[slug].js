@@ -30,7 +30,6 @@ export async function getStaticProps({ params }) {
       collection(db, `users/${userDoc.id}/posts`),
       where("slug", "==", slug)
     );
-
     const postDetails = await getDocs(postRef);
     const postItem = postDetails.docs.map(postToJSON);
     post = postItem[0];
@@ -38,7 +37,6 @@ export async function getStaticProps({ params }) {
 
   return {
     props: { post },
-    revalidate: 1000,
   };
 }
 export async function getStaticPaths() {

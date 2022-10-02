@@ -9,7 +9,7 @@ import {
   orderBy,
   getDocs,
 } from "firebase/firestore";
-import { postToJSON, db } from "../lib/firebase-config";
+import { postToJSON, db, getUserDocWithUsername } from "../lib/firebase-config";
 import { useState } from "react";
 export default function Home(props) {
   const [documents, setDocuments] = useState(props.posts);

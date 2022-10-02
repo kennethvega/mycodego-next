@@ -154,11 +154,7 @@ const UserProfile = ({ userDetail, posts }) => {
                   <span>Username:</span>
                   <input
                     type="text"
-                    onChange={(e) =>
-                      setUsername(
-                        e.target.value.replace(/\s+/g, "_").toLocaleLowerCase()
-                      )
-                    }
+                    onChange={(e) => setUsername(e.target.value)}
                     value={username}
                     disabled={loading ? true : false}
                   />

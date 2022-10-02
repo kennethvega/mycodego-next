@@ -21,7 +21,6 @@ const ProfileDropdown = () => {
         <AiFillDownCircle className={styles["down-circle-svg"]} />
 
         <Image
-          // replace this with photoUrl
           src={user.photoURL ? user.photoURL : "/blank-profile.png"}
           width={40}
           height={40}

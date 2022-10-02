@@ -2,10 +2,11 @@
 
 :root {
   //  default theme = light
-  --background-color: #fff;
+  --background-color: #ffff;
   --text: #343434;
+  --text-light: #666666;
   --hover-text: #262626;
-  --gray-bg: #ededed;
+  --gray-bg: #f8f8f8;
   --hover-gray-bg: #dedede;
   --line-color: #c8c8c8;
 }
@@ -13,6 +14,7 @@
   // dark theme
   --background-color: #1e1e1e;
   --text: #ffff;
+  --text-light: #cfcfcf;
   --hover-text: #e3e3e3;
   --gray-bg: #2e2e2e;
   --hover-gray-bg: #363636;
@@ -70,9 +72,7 @@ html {
     }
   }
 }
-a {
-  color: var(--text);
-}
+
 .public-toggle-container {
   display: flex;
   flex-direction: column;
@@ -97,4 +97,13 @@ a {
   overflow: hidden;
   border-radius: 50%;
   border: none;
+}
+a {
+  color: var(--text);
+  padding: 3px;
+  font-weight: 400;
+  text-decoration: none;
+  &:hover {
+    color: var(--hover-text);
+  }
 }

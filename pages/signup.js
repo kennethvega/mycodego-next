@@ -9,6 +9,7 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [fullName, setFullName] = useState("");
   const { error, signup, isPending } = useSignup();
   const { user } = useAuthContext();
   const router = useRouter();
@@ -48,16 +49,13 @@ const Signup = () => {
             value={password}
           />
         </label>
+
         <label>
           <span>User name:</span>
           <input
             type="text"
             required
-            onChange={(e) =>
-              setUserName(
-                e.target.value.replace(/\s+/g, "_").toLocaleLowerCase()
-              )
-            }
+            onChange={(e) => setUserName(e.target.value)}
             value={userName}
           />
         </label>

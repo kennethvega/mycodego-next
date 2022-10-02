@@ -43,7 +43,6 @@
   border-radius: 50%;
 }
 .info-container {
-  cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin-bottom: 5rem;
@@ -63,16 +62,25 @@
   margin-top: 5rem;
 }
 .icons {
-  height: 10rem;
+  height: 50rem;
+
   position: sticky;
-  top: 13rem;
+  top: 18rem;
   margin-top: 1rem;
   font-size: 2.5rem;
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
-
+.username {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  gap: 1rem;
+}
+.image {
+  border-radius: 50%;
+}
 .edit-buttons {
   width: 100%;
   font-size: 25px;

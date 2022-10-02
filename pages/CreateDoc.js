@@ -69,7 +69,7 @@ const CreateDoc = () => {
             required={true}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            maxLength="65"
+            maxLength="80"
           />
         </label>
         <label>
@@ -86,7 +86,7 @@ const CreateDoc = () => {
               fontSize: "1.7rem",
               fontFamily: "Inter, sans-serif",
             }}
-            maxLength="230"
+            maxLength="240"
           />
         </label>
         <label>
