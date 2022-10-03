@@ -40,8 +40,6 @@ const CreateDoc = () => {
       updatedAt: serverTimestamp(),
       id: user.uid,
       photoURL: user.photoURL,
-      hearts: [],
-      comments: [],
     })
       .then(async (docRef) => {
         // console.log(docRef.id);

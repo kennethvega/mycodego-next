@@ -13,11 +13,14 @@ import {
   getUserDocWithUsername,
   postToJSON,
 } from "../../lib/firebase-config";
+import {
+  useCollectionData,
+  useDocumentData,
+} from "react-firebase-hooks/firestore";
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
   const userDoc = await getUserDocWithUsername(username);
   let post;
-  let path;
 
   if (!userDoc) {
     return {
@@ -33,11 +36,10 @@ export async function getStaticProps({ params }) {
     const postItem = postDetails.docs.map(postToJSON);
     post = postItem[0];
   }
-
   return {
     props: { post },
     // delete revalidate later and use on demand revalidation
-    revalidate: 100,
+    revalidate: 10,
   };
 }
 export async function getStaticPaths() {
@@ -55,13 +57,8 @@ export async function getStaticPaths() {
   };
 }
 const Post = (props) => {
-  const q = query(
-    collectionGroup(db, "posts"),
-    where("slug", "==", props.post.slug)
-  );
-
   return (
-    <main className="container margin-top-xl">
+    <main className="container margin-top-xl mx-width-xl">
       <PostContent post={props.post} />
     </main>
   );

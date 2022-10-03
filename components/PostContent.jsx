@@ -39,6 +39,7 @@ const PostContent = ({ post }) => {
   const year = d.getFullYear();
   const date = `${month}, ${day}, ${year}`;
 
+  const defaultImage = "/blank-profile.png";
   const handleDelete = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -55,11 +56,6 @@ const PostContent = ({ post }) => {
 
   return (
     <div className={styles["grid-container"]}>
-      <div className={styles.icons}>
-        <Hearts hearts={post.hearts} slug={post.slug} id={post.id} />
-        <BiCommentDetail className={styles.comment} />
-      </div>
-
       <div className={styles.content}>
         {user?.displayName === post.username && (
           <div className={styles.edit}>

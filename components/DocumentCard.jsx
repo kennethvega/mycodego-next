@@ -51,23 +51,16 @@ const DocumentCard = ({ post }) => {
                 <span className={styles.username}>{displayName}</span>
               </a>
             </Link>
-            <span className={styles.date}>{date.padStart(2, "0")}</span>
           </div>
           <h3>{post.title}</h3>
           <p>{post.summary}</p>
         </div>
 
         <footer className={styles.footer}>
-          <div className={styles.icons}>
-            <AiOutlineHeart className={styles.icon} />
-            <span>{post.hearts ? post.hearts.length : "0"} reactions</span>
-            <BiCommentDetail className={styles.comment} />{" "}
-            <span>{post.comments ? post.comments.length : "0"} comments</span>
-          </div>
-
           <span className={styles.read}>
             {wordCount} words. {minutesToRead} min read
           </span>
+          <span className={styles.date}>{date.padStart(2, "0")}</span>
         </footer>
       </div>
     </Link>
