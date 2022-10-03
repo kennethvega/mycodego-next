@@ -1,6 +1,6 @@
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { db } from "../lib/firebase-config";

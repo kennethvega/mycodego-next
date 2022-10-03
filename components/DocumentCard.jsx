@@ -3,9 +3,8 @@ import styles from "./DocumentCard.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import CapitalizeStringName from "../helpers/CapitalizeStringName";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { BiCommentDetail } from "react-icons/bi";
-import { useAuthContext } from "../hooks/useAuthContext";
 const DocumentCard = ({ post }) => {
   // formating date
   const d = new Date(post.createdAt);
@@ -34,7 +33,7 @@ const DocumentCard = ({ post }) => {
   // word count & minutes to read
   const wordCount = post?.content.trim().split(/\s+/g).length;
   const minutesToRead = (wordCount / 100 + 1).toFixed(0);
-  const { user } = useAuthContext();
+
   return (
     <Link href={`/${post.username}/${post.slug}`}>
       <div className={styles.container}>
@@ -52,7 +51,7 @@ const DocumentCard = ({ post }) => {
                 <span className={styles.username}>{displayName}</span>
               </a>
             </Link>
-            <span>{date.padStart(2, "0")}</span>
+            <span className={styles.date}>{date.padStart(2, "0")}</span>
           </div>
           <h3>{post.title}</h3>
           <p>{post.summary}</p>
@@ -60,11 +59,7 @@ const DocumentCard = ({ post }) => {
 
         <footer className={styles.footer}>
           <div className={styles.icons}>
-            {post.hearts?.includes(user?.uid) ? (
-              <AiFillHeart className={styles["icon-fill"]} />
-            ) : (
-              <AiOutlineHeart className={styles.icon} />
-            )}
+            <AiOutlineHeart className={styles.icon} />
             <span>{post.hearts ? post.hearts.length : "0"} reactions</span>
             <BiCommentDetail className={styles.comment} />{" "}
             <span>{post.comments ? post.comments.length : "0"} comments</span>

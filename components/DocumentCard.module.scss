@@ -3,8 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--gray-bg);
-  width: 75rem;
+  width: 72rem;
   height: 25rem;
   padding: 2rem;
   cursor: pointer;
@@ -12,7 +11,8 @@
   word-wrap: break-word;
   object-fit: cover;
   border-radius: 0.5rem;
-  border: 1px solid var(--line-color);
+  margin-bottom: 1rem;
+
   & h3 {
     font-weight: 800;
     font-size: 2.5rem;
@@ -20,7 +20,7 @@
   }
   & p {
     margin-top: 0.3rem;
-    color: var(--text);
+    color: var(--text-light);
     font-weight: 400;
     font-size: 1.8rem;
   }
@@ -37,6 +37,7 @@
 .username {
   font-size: 1.4rem;
   font-weight: bold;
+  color: var(--text);
 }
 
 .image {
@@ -69,9 +70,7 @@
   font-size: 2rem;
   margin-top: 1rem;
   display: flex;
-  span {
-    color: var(--text-light);
-  }
+  color: var(--text-light);
 }
 .comment {
   margin-left: 2rem;
@@ -83,4 +82,7 @@
 .icon-fill {
   composes: icon-fill from "./Hearts.module.scss";
   font-size: 2rem !important;
+}
+.date {
+  color: var(--text-light);
 }

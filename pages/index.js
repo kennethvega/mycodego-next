@@ -43,6 +43,7 @@ export default function Home(props) {
           />
         </div>
       </div>
+
       <div className="card-container">
         <PostFeed posts={documents} />
       </div>
