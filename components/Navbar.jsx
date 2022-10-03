@@ -19,10 +19,10 @@ const Navbar = () => {
 
         {!user && (
           <div className={styles.list}>
-            <Link href="/Login">
+            <Link href="/login">
               <p className="btn btn-sm">Login</p>
             </Link>
-            <Link href="/Signup">
+            <Link href="/signup">
               <p className={styles["signup-btn"]}>Sign up</p>
             </Link>
             <Theme />
