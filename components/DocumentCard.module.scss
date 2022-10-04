@@ -1,3 +1,4 @@
+@use "../styles/mixin.scss" as mixin;
 .container {
   position: relative;
   display: flex;
@@ -12,6 +13,15 @@
   object-fit: cover;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
+  @include mixin.respond(tab-land) {
+    height: 27rem;
+  }
+  @include mixin.respond(phone-big) {
+    height: 35rem;
+  }
+  @include mixin.respond(phone) {
+    height: 40rem;
+  }
 
   & h3 {
     font-weight: 800;

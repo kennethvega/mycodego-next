@@ -1,3 +1,4 @@
+@use "./mixin" as mixin;
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 
 :root {
@@ -40,6 +41,9 @@ body {
 }
 html {
   font-size: 62.5%;
+  @include mixin.respond(phone) {
+    font-size: 56.25%;
+  }
 }
 .error {
   font-size: 2rem;

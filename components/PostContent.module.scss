@@ -1,3 +1,4 @@
+@use "../styles/mixin.scss" as mixin;
 .content {
   overflow: hidden;
   word-wrap: break-word;
@@ -6,6 +7,9 @@
   font-size: 5rem;
   font-weight: 900;
   margin-bottom: 2rem;
+  @include mixin.respond(phone-big) {
+    font-size: 3rem;
+  }
 }
 .subtitle {
   display: flex;
