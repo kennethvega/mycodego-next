@@ -66,6 +66,3 @@ export async function getServerSideProps() {
     },
   };
 }
-// check in production if this behavior is still on
-// 1. heart increment decrement is slow.
-// 2.internet disconnection in firebase
