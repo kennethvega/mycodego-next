@@ -75,14 +75,7 @@
 .comment {
   margin-left: 2rem;
 }
-.icon {
-  composes: icon from "./Hearts.module.scss";
-  font-size: 2rem !important;
-}
-.icon-fill {
-  composes: icon-fill from "./Hearts.module.scss";
-  font-size: 2rem !important;
-}
+
 .date {
   color: var(--text-light);
 }

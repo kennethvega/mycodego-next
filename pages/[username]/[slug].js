@@ -5,18 +5,14 @@ import {
   getDocs,
   collection,
 } from "firebase/firestore";
-import { useRouter } from "next/router";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import PostContent from "../../components/PostContent";
 import {
   db,
   getUserDocWithUsername,
   postToJSON,
 } from "../../lib/firebase-config";
-import {
-  useCollectionData,
-  useDocumentData,
-} from "react-firebase-hooks/firestore";
+
 export async function getStaticProps({ params }) {
   const { username, slug } = params;
   const userDoc = await getUserDocWithUsername(username);

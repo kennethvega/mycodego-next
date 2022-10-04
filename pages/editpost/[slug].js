@@ -17,6 +17,7 @@ const EditPostContent = ({ post }) => {
   const [publicPost, setPublicPost] = useState(true);
   const { user } = useAuthContext();
   const router = useRouter();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -27,12 +28,12 @@ const EditPostContent = ({ post }) => {
       summary: summary,
       content: tiptapContent,
       published: publicPost,
-
       updatedAt: serverTimestamp(),
     }).catch((error) => {
       console.log(error);
     });
     await router.push(`/${post.username}/${post.slug}`);
+
     setIsLoading(false);
     toast.success("Successfully edited post.");
   };

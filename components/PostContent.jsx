@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./PostContent.module.scss";
 import DOMPurify from "dompurify";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -11,13 +11,14 @@ import { db } from "../lib/firebase-config";
 import { useRouter } from "next/router";
 import Loader from "./Loader";
 import { toast } from "react-toastify";
-import Hearts from "./Hearts";
+
 import CapitalizeStringName from "../helpers/CapitalizeStringName";
 import Image from "next/image";
 const PostContent = ({ post }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+
   // format date
   const d = new Date(post.createdAt);
   const months = [
