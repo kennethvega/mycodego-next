@@ -9,12 +9,34 @@ import {
   orderBy,
   getDocs,
 } from "firebase/firestore";
-import { postToJSON, db, getUserDocWithUsername } from "../lib/firebase-config";
-import { useState } from "react";
+import { postToJSON, db } from "../lib/firebase-config";
+import { useEffect, useState } from "react";
 export default function Home(props) {
   const [documents, setDocuments] = useState(props.posts);
-
+  const [filteredDocs, setFilteredDocs] = useState([]);
+  const [filters, setFilters] = useState({ s: "" });
+  console.log(documents);
   const { user } = useAuthContext();
+
+  useEffect(() => {
+    //  let products = allProducts.filter(p => p.title.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0 ||
+    // p.description.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0);
+
+    if (documents) {
+      let docs = documents.filter(
+        (doc) =>
+          doc.title.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0 ||
+          doc.summary.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0
+      );
+      setFilteredDocs(docs);
+    }
+  }, [filters]);
+  //
+  const search = (s) => {
+    setFilters({
+      s,
+    });
+  };
 
   return (
     <div className="container margin-top-xl">
@@ -40,12 +62,13 @@ export default function Home(props) {
             type="text"
             className={styles.search}
             placeholder="Search a doc"
+            onKeyUp={(e) => search(e.target.value)}
           />
         </div>
       </div>
 
       <div className="card-container">
-        <PostFeed posts={documents} />
+        <PostFeed posts={filteredDocs} />
       </div>
     </div>
   );
