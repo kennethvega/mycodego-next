@@ -18,10 +18,8 @@ export default function Home(props) {
   console.log(documents);
   const { user } = useAuthContext();
 
+  // search function
   useEffect(() => {
-    //  let products = allProducts.filter(p => p.title.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0 ||
-    // p.description.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0);
-
     if (documents) {
       let docs = documents.filter(
         (doc) =>
